@@ -12,7 +12,6 @@
         android:orientation="vertical">
 
 
-
             <EditText
                 android:id="@+id/edtUserName"
                 android:layout_width="match_parent"
@@ -75,7 +74,6 @@
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </RelativeLayout>
-        </LinearLayout>
 
 
         <View
@@ -83,34 +81,7 @@
             android:layout_height="@dimen/_30sdp" />
 
 
-        <LinearLayout
-            android:id="@+id/llBelow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/opensans_regular"
-                android:padding="@dimen/_5sdp"
-                android:text="Already registered!"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/txtSignUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/opensans_semibold"
-                android:padding="@dimen/_5sdp"
-                android:text="Login Me."
-                android:textColor="@color/colorPrimary" />
-        </LinearLayout>
-
+    </LinearLayout>
 
 </ScrollView>
 
