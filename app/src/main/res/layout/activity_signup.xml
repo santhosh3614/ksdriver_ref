@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgProfile"
             android:layout_width="@dimen/_75sdp"
@@ -21,7 +20,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@mipmap/ic_launcher" />
 
-         <TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -30,7 +29,7 @@
 
 
         <EditText
-            android:id="@+id/edtUserName"
+            android:id="@+id/edtFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_7sdp"
@@ -42,13 +41,33 @@
             android:drawablePadding="@dimen/_10sdp"
             android:fontFamily="@font/opensans_regular"
             android:gravity="center_vertical"
-            android:hint="@string/full_name"
+            android:hint="@string/first_name"
             android:inputType="text"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/gray_text_color"
             android:textColorHint="@color/gray_text_color"
             android:textSize="16sp" />
 
+
+        <EditText
+            android:id="@+id/edtLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/bg_edit_text"
+            android:drawableLeft="@drawable/user"
+            android:drawablePadding="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:hint="@string/last_name"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/gray_text_color"
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/edtEmail"
@@ -63,7 +82,7 @@
             android:drawablePadding="@dimen/_10sdp"
             android:fontFamily="@font/opensans_regular"
             android:gravity="center_vertical"
-            android:hint="Email (Option)"
+            android:hint="Email id"
             android:inputType="textEmailAddress"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/gray_text_color"
@@ -71,6 +90,68 @@
             android:textSize="16sp" />
 
         <EditText
+            android:id="@+id/edtMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/bg_edit_text"
+            android:drawableLeft="@drawable/mobile"
+            android:drawablePadding="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:hint="@string/mobile"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/gray_text_color"
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edtState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/bg_edit_text"
+            android:drawableLeft="@drawable/state"
+            android:drawablePadding="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:hint="State"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/gray_text_color"
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edtCarNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/bg_edit_text"
+            android:drawableLeft="@drawable/flag_canada"
+            android:drawablePadding="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:hint="Car No"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/gray_text_color"
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="16sp" />
+
+
+        <EditText
+            android:id="@+id/edtCarModel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_8sdp"
@@ -82,7 +163,7 @@
             android:drawablePadding="@dimen/_10sdp"
             android:fontFamily="@font/opensans_regular"
             android:gravity="center_vertical"
-            android:hint="Email (Option)"
+            android:hint="Car Model No(Example:2016)"
             android:inputType="textEmailAddress"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/gray_text_color"
@@ -91,99 +172,51 @@
 
 
         <EditText
+            android:id="@+id/edtAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_8sdp"
             android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginRight="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
+            android:background="@drawable/bg_text_area"
             android:drawableLeft="@drawable/email"
             android:drawablePadding="@dimen/_10sdp"
             android:fontFamily="@font/opensans_regular"
             android:gravity="center_vertical"
-            android:hint="Email (Option)"
-            android:inputType="textEmailAddress"
+            android:hint="Address"
+            android:lines="3"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/gray_text_color"
             android:textColorHint="@color/gray_text_color"
             android:textSize="16sp" />
 
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/email"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
-            android:hint="Email (Option)"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/email"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
-            android:hint="Email (Option)"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/email"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
-            android:hint="Email (Option)"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:scaleType="fitXY"
+                android:src="@drawable/car" />
 
-        <EditText
-            android:layout_width="match_parent"
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtUpload"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/email"
-            android:drawablePadding="@dimen/_10sdp"
+            android:background="@drawable/bg_blue_button"
             android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
-            android:hint="Email (Option)"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
+            android:paddingBottom="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_30sdp"
+            android:paddingRight="@dimen/_30sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:text="Uplaod Doc"
+            android:textColor="@color/white"
             android:textSize="16sp" />
-
 
 
         <RelativeLayout
@@ -193,8 +226,9 @@
             android:layout_marginRight="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp">
 
+
             <TextView
-                android:id="@+id/txtLogin"
+                android:id="@+id/txtSubmit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_yello_button"
@@ -208,13 +242,11 @@
                 android:textSize="16sp" />
         </RelativeLayout>
 
-
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp" />
 
 
     </LinearLayout>
-
 </ScrollView>
 
