@@ -130,7 +130,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/edtCarNo"
+            android:id="@+id/edtCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_8sdp"
@@ -142,7 +142,7 @@
             android:drawablePadding="@dimen/_10sdp"
             android:fontFamily="@font/opensans_regular"
             android:gravity="center_vertical"
-            android:hint="Car No"
+            android:hint="City"
             android:inputType="textEmailAddress"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/gray_text_color"
@@ -163,13 +163,32 @@
             android:drawablePadding="@dimen/_10sdp"
             android:fontFamily="@font/opensans_regular"
             android:gravity="center_vertical"
-            android:hint="Car Model No(Example:2016)"
+            android:hint="@string/your_linsence_no"
             android:inputType="textEmailAddress"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/gray_text_color"
             android:textColorHint="@color/gray_text_color"
             android:textSize="16sp" />
 
+        <EditText
+            android:id="@+id/edtExpr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/bg_edit_text"
+            android:drawableLeft="@drawable/email"
+            android:drawablePadding="@dimen/_10sdp"
+            android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical"
+            android:hint="Exprence"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/gray_text_color"
+            android:textColorHint="@color/gray_text_color"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/edtAddress"

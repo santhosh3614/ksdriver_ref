@@ -55,6 +55,7 @@
     <string name="last_name">Last Name</string>
     <string name="email">Email</string>
     <string name="mobile">Mobile</string>
+    <string name="your_linsence_no">Your Linsence No</string>
 
     <string-array name="Qnty">
         <item>1</item>
