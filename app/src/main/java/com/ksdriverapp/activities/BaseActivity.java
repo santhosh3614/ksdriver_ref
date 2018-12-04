@@ -17,7 +17,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void replaceFragmenr(Fragment fragment, String tag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.main_cantainer, fragment);
+        transaction.replace(R.id.main_cantainer, fragment);
         transaction.addToBackStack(tag);
         transaction.commit();
     }
@@ -28,7 +28,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right); //slide_in_right
     }
-
 
 
 }
