@@ -31,23 +31,14 @@
             android:layout_height="wrap_content"
             android:text="sdasd" />
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/imgOnnOffDuaty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/selector_button" />
 
-            <ImageView
-                android:id="@+id/imgOffline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/off_duty" />
 
-            <ImageView
-                android:id="@+id/imgOnline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/on_duty" />
-        </RelativeLayout>
     </LinearLayout>
 
     <TextView

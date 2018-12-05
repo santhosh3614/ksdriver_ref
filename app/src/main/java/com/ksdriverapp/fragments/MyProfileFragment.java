@@ -6,12 +6,14 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.ksdriverapp.R;
 
 public class MyProfileFragment extends BaseFragment {
 
     public static String TAG = MyProfileFragment.class.getSimpleName();
+    private ImageView imgOnnOffDuaty;
 
     public static MyProfileFragment getInstance(Bundle bundle) {
         MyProfileFragment myProfileFragment = new MyProfileFragment();
@@ -31,10 +33,24 @@ public class MyProfileFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        imgOnnOffDuaty = view.findViewById(R.id.imgOnnOffDuaty);
+        try {
+            init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void init() {
+        imgOnnOffDuaty.setOnClickListener(v -> {
+            if (imgOnnOffDuaty.isSelected()) {
+                imgOnnOffDuaty.setSelected(false);
+            } else {
+                imgOnnOffDuaty.setSelected(true);
+            }
+
+        });
 
     }
 }
