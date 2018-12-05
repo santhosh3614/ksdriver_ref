@@ -41,6 +41,30 @@ public class PoupUtils {
         dialog.show();
     }
 
+    public static void showCameraAndGallery(Activity activity, String message, View.OnClickListener cameraClick, View.OnClickListener galleryClick) {
+        final Dialog dialog = new Dialog(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.black_tran_60);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.layout_camera_galary_dialog);
+        TextView txtCamera = dialog.findViewById(R.id.txtCamera);
+        TextView txtGallery = dialog.findViewById(R.id.txtGallery);
+        TextView txtTitle = dialog.findViewById(R.id.txtTitle);
+        txtTitle.setText(message);
+        txtCamera.setOnClickListener(v -> {
+            txtCamera.setTag("Take Photo");
+            dialog.cancel();
+            cameraClick.onClick(txtCamera);
+        });
+        txtGallery.setOnClickListener(v -> {
+            txtGallery.setTag("Choose from Library");
+            dialog.cancel();
+            galleryClick.onClick(txtGallery);
+        });
+        dialog.show();
+    }
+
+
     public static void showAlertDailog(Activity activity, String message) {
 
         final Dialog dialog = new Dialog(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
@@ -94,9 +118,9 @@ public class PoupUtils {
 //                        txtTime.setText(hourOfDay + ":" + minute);
                 }, mHour, mMinute, false);
 
-          timePickerDialog.show();
+        timePickerDialog.show();
 
-           timePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "cancel",
+        timePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "cancel",
                 (view, which) -> {
 
                 });
@@ -106,7 +130,7 @@ public class PoupUtils {
 
                 });
 
-      }
+    }
 
 }
 
