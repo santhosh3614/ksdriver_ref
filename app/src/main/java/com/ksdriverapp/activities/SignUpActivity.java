@@ -1,6 +1,7 @@
 package com.ksdriverapp.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,15 +16,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ksdriverapp.R;
+import com.ksdriverapp.models.SignUpModel;
+import com.ksdriverapp.retrofit.WsFactory;
+import com.ksdriverapp.retrofit.WsResponse;
+import com.ksdriverapp.retrofit.WsUtils;
 import com.ksdriverapp.utils.PermisionUtils;
 import com.ksdriverapp.utils.PoupUtils;
 import com.ksdriverapp.utils.StaticUtils;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
+import dmax.dialog.SpotsDialog;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
 
 /**
  * Created by SONI on 11/29/2018.
  */
 
-public class SignUpActivity extends BaseActivity {
+public class SignUpActivity extends BaseActivity implements WsResponse {
 
     private static final int REQUEST_CAMERA = 1001;
     private static final int SELECT_FILE = 1002;
@@ -31,6 +46,9 @@ public class SignUpActivity extends BaseActivity {
     private EditText edtFirstName, edtLastName, edtMobile, edtEmail, edtState, edtCarNo, edtCarModel, edtAddress;
     private TextView txtSubmit;
     private String selectedValue;
+    private String filePath = "";
+    private AlertDialog progressDialog;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +72,7 @@ public class SignUpActivity extends BaseActivity {
         txtSubmit = findViewById(R.id.txtSubmit);
         imgProfile = findViewById(R.id.imgProfile);
         edtAddress = findViewById(R.id.edtAddress);
+        progressDialog = new SpotsDialog(this, R.style.Custom);
 
         imgProfile.setOnClickListener(v -> {
             PoupUtils.showCameraAndGallery(this, "Choose option",
@@ -91,8 +110,42 @@ public class SignUpActivity extends BaseActivity {
                 PoupUtils.showAlertDailog(this, "Enter car model");
             } else if (TextUtils.isEmpty(address)) {
                 PoupUtils.showAlertDailog(this, "Enter Address");
+            } else if (TextUtils.isEmpty(filePath)) {
+                PoupUtils.showAlertDailog(this, "Please select picture");
             } else {
-                startActivity(new Intent(this, MainActivity.class));
+//                startActivity(new Intent(this, MainActivity.class));
+
+                progressDialog.show();
+                File file = new File(filePath);
+                RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+                MultipartBody.Part body = MultipartBody.Part.createFormData("vLicenceImage", file.getName(), reqFile);
+
+                RequestBody vDriverName = RequestBody.create(MediaType.parse("text/plain"), firstName + " " + lastName);
+                RequestBody iCarCetegoryId = RequestBody.create(MediaType.parse("text/plain"), "2");
+                RequestBody vCarNumber = RequestBody.create(MediaType.parse("text/plain"), "sdfsdf154451");
+                RequestBody iCarModel = RequestBody.create(MediaType.parse("text/plain"), "2016");
+                RequestBody vLicenceNumber = RequestBody.create(MediaType.parse("text/plain"), "sdfsdf564645");
+                RequestBody iDriverContactNo = RequestBody.create(MediaType.parse("text/plain"), "123456789");
+                RequestBody txDriverAddress = RequestBody.create(MediaType.parse("text/plain"), "asdfasdfgsdfgdfgsdfg");
+                RequestBody iDriverAlterContactNo = RequestBody.create(MediaType.parse("text/plain"), "315648474654");
+                RequestBody vDriverEmail = RequestBody.create(MediaType.parse("text/plain"), "dhgfg@gmail.com");
+                RequestBody vDriverExp = RequestBody.create(MediaType.parse("text/plain"), "5 yr");
+                RequestBody vCity = RequestBody.create(MediaType.parse("text/plain"), "Ahemdabad");
+
+                Map<String, RequestBody> map = new HashMap<>();
+                map.put("vDriverName", vDriverName);
+                map.put("iCarCetegoryId", iCarCetegoryId);
+                map.put("vCarNumber", vCarNumber);
+                map.put("iCarModel", iCarModel);
+                map.put("vLicenceNumber", vLicenceNumber);
+                map.put("iDriverContactNo", iDriverContactNo);
+                map.put("txDriverAddress", txDriverAddress);
+                map.put("iDriverAlterContactNo", iDriverAlterContactNo);
+                map.put("vDriverEmail", vDriverEmail);
+                map.put("vDriverExp", vDriverExp);
+                map.put("vCity", vCity);
+                Call loginWsCall = WsFactory.signUp(body, map);
+                WsUtils.getReponse(loginWsCall, StaticUtils.REQUEST_SIGN_UP, this);
             }
         });
     }
@@ -139,8 +192,9 @@ public class SignUpActivity extends BaseActivity {
     @SuppressWarnings("deprecation")
     private void onSelectFromGalleryResult(Intent data) {
         Uri picUri = data.getData();
-        String filePath = StaticUtils.getPath(getApplicationContext(), picUri);
+        filePath = StaticUtils.getPath(getApplicationContext(), picUri);
         imgProfile.setImageURI(picUri);
+
         Log.e("Image path", "" + filePath);
     }
 
@@ -162,8 +216,24 @@ public class SignUpActivity extends BaseActivity {
         }*/
         imgProfile.setImageBitmap(thumbnail);
         Uri tempUri = StaticUtils.getImageUriFromCameraBitmap(getApplicationContext(), thumbnail);
-        Log.e("Camera image", "" + StaticUtils.getPath(getApplicationContext(), tempUri));
-       }
+        filePath = StaticUtils.getPath(getApplicationContext(), tempUri);
+        Log.e("Camera image", "" + filePath);
+    }
+
+    @Override
+    public void successResponse(Object response, int code) {
+        progressDialog.cancel();
+        switch (code) {
+            case StaticUtils.REQUEST_SIGN_UP:
+                SignUpModel signUpModel = (SignUpModel) response;
+                Log.e("Response", "" + signUpModel);
+        }
+    }
+
+    @Override
+    public void failureRespons(Throwable error, int code) {
+        progressDialog.cancel();
+    }
 
 }
 

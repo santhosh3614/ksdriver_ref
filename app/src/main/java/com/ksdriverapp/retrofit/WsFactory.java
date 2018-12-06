@@ -1,5 +1,7 @@
 package com.ksdriverapp.retrofit;
 
+import com.ksdriverapp.models.SignUpModel;
+
 import org.json.JSONObject;
 
 import java.util.Map;
@@ -41,6 +43,12 @@ public class WsFactory {
 
     }
 */
+
+    public static Call signUp(MultipartBody.Part image, Map<String, RequestBody> map) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<SignUpModel> loginCall = apiService.signUp(image, map);
+        return loginCall;
+    }
 
 
 }
