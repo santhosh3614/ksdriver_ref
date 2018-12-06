@@ -1,7 +1,12 @@
 package com.ksdriverapp.utils;
 
 import android.content.Context;
+import android.content.CursorLoader;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.view.Gravity;
 import android.view.View;
@@ -10,6 +15,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ksdriverapp.R;
+
+import java.io.ByteArrayOutputStream;
 
 
 public class StaticUtils {
@@ -46,6 +53,31 @@ public class StaticUtils {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         return email.matches(emailPattern);
     }
+
+
+
+    public static Uri getImageUriFromCameraBitmap(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 10, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+
+    public static String getPath(Context context, Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(context, contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
+    }
+
+
+
+
 
     /*public GeoPoint getLocationFromAddress(Context context, String strAddress){
 

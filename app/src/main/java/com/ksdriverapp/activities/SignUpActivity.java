@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,12 +17,7 @@ import android.widget.TextView;
 import com.ksdriverapp.R;
 import com.ksdriverapp.utils.PermisionUtils;
 import com.ksdriverapp.utils.PoupUtils;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import com.ksdriverapp.utils.StaticUtils;
 
 /**
  * Created by SONI on 11/29/2018.
@@ -142,23 +138,17 @@ public class SignUpActivity extends BaseActivity {
 
     @SuppressWarnings("deprecation")
     private void onSelectFromGalleryResult(Intent data) {
-        Bitmap bm = null;
-        if (data != null) {
-            try {
-                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        imgProfile.setImageBitmap(bm);
+        Uri picUri = data.getData();
+        String filePath = StaticUtils.getPath(getApplicationContext(), picUri);
+        imgProfile.setImageURI(picUri);
+        Log.e("Image path", "" + filePath);
     }
 
     private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        /*ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
+        File destination = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
         FileOutputStream fo;
         try {
             destination.createNewFile();
@@ -169,9 +159,11 @@ public class SignUpActivity extends BaseActivity {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
         imgProfile.setImageBitmap(thumbnail);
-    }
+        Uri tempUri = StaticUtils.getImageUriFromCameraBitmap(getApplicationContext(), thumbnail);
+        Log.e("Camera image", "" + StaticUtils.getPath(getApplicationContext(), tempUri));
+       }
 
 }
 
