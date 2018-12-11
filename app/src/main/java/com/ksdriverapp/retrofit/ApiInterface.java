@@ -1,5 +1,6 @@
 package com.ksdriverapp.retrofit;
 
+import com.ksdriverapp.models.CategoryModel;
 import com.ksdriverapp.models.SignUpModel;
 
 import java.util.Map;
@@ -7,6 +8,8 @@ import java.util.Map;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -56,13 +59,45 @@ public interface ApiInterface {
     /*
      */
 
+    //This is for definiation
+    /*@Multipart
+    @POST(WebServices.UPLOAD_SURVEY)
+    Call<UploadSurveyResponseModel> uploadSurvey(@Part MultipartBody.Part[] surveyImage, @Part MultipartBody.Part propertyImage, @Part("DRA") RequestBody dra)
+    */
+
+    /*
+private void requestUploadSurvey() {
+  File propertyImageFile = new File(surveyModel.getPropertyImagePath());
+    RequestBody propertyImage = RequestBody.create(MediaType.parse("image/*"), propertyImageFile);
+    MultipartBody.Part propertyImagePart = MultipartBody.Part.createFormData("PropertyImage", propertyImageFile.getName(), propertyImage);
+
+    MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[surveyModel.getPicturesList().size()];
+
+    for (int index = 0; index < surveyModel.getPicturesList().size(); index++) {
+        Log.d(TAG, "requestUploadSurvey: survey image " + index + "  " + surveyModel.getPicturesList().get(index).getImagePath());
+        File file = new File(surveyModel.getPicturesList().get(index).getImagePath());
+        RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
+        surveyImagesParts[index] = MultipartBody.Part.createFormData("SurveyImage", file.getName(), surveyBody);
+    }
+
+    final WebServicesAPI webServicesAPI = RetrofitManager.getInstance().getRetrofit().create(WebServicesAPI.class);
+    Call<UploadSurveyResponseModel> surveyResponse = null;
+    if (surveyImagesParts != null) {
+        surveyResponse = webServicesAPI.uploadSurvey(surveyImagesParts, propertyImagePart, draBody);
+    }
+    surveyResponse.enqueue(this);
+}
+    */
+
 
 
     @Multipart
     @POST("oauth/driversignup")
     Call<SignUpModel> signUp(@Part MultipartBody.Part image, @PartMap Map<String, RequestBody> map);
 
-
+    @FormUrlEncoded
+    @POST("LoginNew.php/")
+    Call<CategoryModel> getCategory(@FieldMap Map<String, String> fields);
 
 
 }

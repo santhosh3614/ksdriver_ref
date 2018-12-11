@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.ksdriverapp.R;
 import com.ksdriverapp.models.SignUpModel;
+import com.ksdriverapp.prefrences.SessionManager;
 import com.ksdriverapp.retrofit.WsFactory;
 import com.ksdriverapp.retrofit.WsResponse;
 import com.ksdriverapp.retrofit.WsUtils;
@@ -48,6 +49,7 @@ public class SignUpActivity extends BaseActivity implements WsResponse {
     private String selectedValue;
     private String filePath = "";
     private AlertDialog progressDialog;
+    private SessionManager sessionManager;
 
 
     @Override
@@ -73,6 +75,7 @@ public class SignUpActivity extends BaseActivity implements WsResponse {
         imgProfile = findViewById(R.id.imgProfile);
         edtAddress = findViewById(R.id.edtAddress);
         progressDialog = new SpotsDialog(this, R.style.Custom);
+        sessionManager = new SessionManager(this);
 
         imgProfile.setOnClickListener(v -> {
             PoupUtils.showCameraAndGallery(this, "Choose option",
@@ -114,7 +117,6 @@ public class SignUpActivity extends BaseActivity implements WsResponse {
                 PoupUtils.showAlertDailog(this, "Please select picture");
             } else {
 //                startActivity(new Intent(this, MainActivity.class));
-
                 progressDialog.show();
                 File file = new File(filePath);
                 RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
@@ -173,7 +175,7 @@ public class SignUpActivity extends BaseActivity implements WsResponse {
                         galleryIntent();
                 } else {
                     //code for deny
-                }
+                 }
                 break;
         }
     }
@@ -194,26 +196,11 @@ public class SignUpActivity extends BaseActivity implements WsResponse {
         Uri picUri = data.getData();
         filePath = StaticUtils.getPath(getApplicationContext(), picUri);
         imgProfile.setImageURI(picUri);
-
         Log.e("Image path", "" + filePath);
     }
 
     private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        /*ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File destination = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
-        FileOutputStream fo;
-        try {
-            destination.createNewFile();
-            fo = new FileOutputStream(destination);
-            fo.write(bytes.toByteArray());
-            fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
         imgProfile.setImageBitmap(thumbnail);
         Uri tempUri = StaticUtils.getImageUriFromCameraBitmap(getApplicationContext(), thumbnail);
         filePath = StaticUtils.getPath(getApplicationContext(), tempUri);
@@ -227,7 +214,8 @@ public class SignUpActivity extends BaseActivity implements WsResponse {
             case StaticUtils.REQUEST_SIGN_UP:
                 SignUpModel signUpModel = (SignUpModel) response;
                 Log.e("Response", "" + signUpModel);
-        }
+                sessionManager.setUserId(signUpModel.getResponseData().getIDriverId() + "");
+          }
     }
 
     @Override
