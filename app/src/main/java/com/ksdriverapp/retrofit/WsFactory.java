@@ -52,6 +52,12 @@ public class WsFactory {
         return loginCall;
     }
 
+    public static Call signUp(MultipartBody.Part[] images,  MultipartBody.Part image, Map<String, RequestBody> map) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<SignUpModel> loginCall = apiService.carSignUp(images,image, map);
+        return loginCall;
+    }
+
 
     public static Call getCategory(@FieldMap Map<String, String> fields) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);

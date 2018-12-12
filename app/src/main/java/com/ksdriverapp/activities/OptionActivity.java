@@ -26,7 +26,7 @@ public class OptionActivity extends BaseActivity {
     @Override
     public void initComponents() {
         llCar = findViewById(R.id.llCar);
-        llBookDriver = findViewById(R.id.llCar);
+        llBookDriver = findViewById(R.id.llBookDriver);
 
         llCar.setOnClickListener(v -> {
             startActivity(new Intent(OptionActivity.this, CarSignUpActivity.class));
@@ -34,7 +34,7 @@ public class OptionActivity extends BaseActivity {
         });
         
         llBookDriver.setOnClickListener(v -> {
-            startActivity(new Intent(OptionActivity.this, SignUpActivity.class));
+            startActivity(new Intent(OptionActivity.this, SignUpDriverActivity.class));
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 

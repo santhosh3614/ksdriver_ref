@@ -67,7 +67,8 @@ public interface ApiInterface {
 
     /*
 private void requestUploadSurvey() {
-  File propertyImageFile = new File(surveyModel.getPropertyImagePath());
+
+   File propertyImageFile = new File(surveyModel.getPropertyImagePath());
     RequestBody propertyImage = RequestBody.create(MediaType.parse("image/*"), propertyImageFile);
     MultipartBody.Part propertyImagePart = MultipartBody.Part.createFormData("PropertyImage", propertyImageFile.getName(), propertyImage);
 
@@ -86,14 +87,19 @@ private void requestUploadSurvey() {
         surveyResponse = webServicesAPI.uploadSurvey(surveyImagesParts, propertyImagePart, draBody);
     }
     surveyResponse.enqueue(this);
-}
+ }
     */
-
 
 
     @Multipart
     @POST("oauth/driversignup")
     Call<SignUpModel> signUp(@Part MultipartBody.Part image, @PartMap Map<String, RequestBody> map);
+
+
+    @Multipart
+    @POST("oauth/driversignup")
+    Call<SignUpModel> carSignUp(@Part MultipartBody.Part[] documentImage, @Part MultipartBody.Part image, @PartMap Map<String, RequestBody> map);
+
 
     @FormUrlEncoded
     @POST("LoginNew.php/")

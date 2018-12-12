@@ -59,6 +59,11 @@
     <string name="apply_on_duty">Apply on Duty</string>
     <string name="end_time">End Time</string>
     <string name="start_time">Start Time</string>
+    <string name="register_your_car_">Register your car</string>
+    <string name="select_car_type">Select car type</string>
+    <string name="enter_car_no">Enter Car No</string>
+    <string name="enter_car_model">Enter car model</string>
+    <string name="licence_no">Licence No</string>
 
     <string-array name="Qnty">
         <item>1</item>

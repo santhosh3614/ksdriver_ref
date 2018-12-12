@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 
 
 import com.ksdriverapp.KSDriverApp;
-import com.ksdriverapp.activities.SignUpActivity;
+import com.ksdriverapp.activities.SignUpDriverActivity;
 
 import java.util.HashMap;
 
@@ -195,7 +195,7 @@ public class SessionManager {
 
     public void checkLogin() {
         if (!this.isLoggedIn()) {
-            Intent i = new Intent(context, SignUpActivity.class);
+            Intent i = new Intent(context, SignUpDriverActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);

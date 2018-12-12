@@ -39,7 +39,7 @@ import retrofit2.Call;
  * Created by SONI on 11/29/2018.
  */
 
-public class SignUpActivity extends BaseActivity implements WsResponse {
+public class SignUpDriverActivity extends BaseActivity implements WsResponse {
 
     private static final int REQUEST_CAMERA = 1001;
     private static final int SELECT_FILE = 1002;
@@ -214,7 +214,7 @@ public class SignUpActivity extends BaseActivity implements WsResponse {
             case StaticUtils.REQUEST_SIGN_UP:
                 SignUpModel signUpModel = (SignUpModel) response;
                 sessionManager.setUserId(signUpModel.getResponseData().getIDriverId() + "");
-                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                Intent intent = new Intent(SignUpDriverActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
