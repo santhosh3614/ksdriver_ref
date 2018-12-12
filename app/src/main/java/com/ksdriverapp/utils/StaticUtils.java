@@ -35,6 +35,7 @@ public class StaticUtils {
     public static final int REQUEST_FOR_AUOTOCOMPLETE_ADDRESS = 5002;
     public static final int REQUEST_SIGN_UP = 5003;
     public static final int REQUEST_OTP_SEND_PASSWORD = 5004;
+    public static final int REQUEST_UPLOAD = 5005;
 
 
     public static void showSnakBar(Context context, ViewGroup viewGroup, String message) {
@@ -55,7 +56,6 @@ public class StaticUtils {
     }
 
 
-
     public static Uri getImageUriFromCameraBitmap(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 10, bytes);
@@ -74,7 +74,6 @@ public class StaticUtils {
         cursor.close();
         return result;
     }
-
 
 
 

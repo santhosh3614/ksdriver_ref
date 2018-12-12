@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    public static final String BASE_URL = "http://denmobiles.com/public/";
+    public static final String BASE_URL = "http://apnaplaces.com/kstranfer/test_react/api/v1/";
     public static final String BASE_URL_XML = "http://api.themoviedb.org/3/";
     private static Retrofit retrofit = null;
 
