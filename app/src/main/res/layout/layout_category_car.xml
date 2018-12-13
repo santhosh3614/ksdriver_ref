@@ -28,33 +28,15 @@
             android:textColor="@color/black"
             android:textSize="14sp" />
 
-        <RelativeLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvCarList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_15sdp">
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp" />
 
-            <ImageView
-                android:id="@+id/imgCamera"
-                android:layout_width="@dimen/_60sdp"
-                android:layout_height="@dimen/_60sdp"
-                android:layout_marginLeft="@dimen/_40sdp"
-                android:padding="@dimen/_10sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_camera" />
-
-            <ImageView
-                android:id="@+id/imgGallary"
-                android:layout_width="@dimen/_60sdp"
-                android:layout_height="@dimen/_60sdp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/_40sdp"
-                android:padding="@dimen/_10sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_gallary" />
-
-
-        </RelativeLayout>
 
     </LinearLayout>
 </RelativeLayout>
+

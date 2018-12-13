@@ -36,6 +36,7 @@ public class StaticUtils {
     public static final int REQUEST_SIGN_UP = 5003;
     public static final int REQUEST_OTP_SEND_PASSWORD = 5004;
     public static final int REQUEST_UPLOAD = 5005;
+    public static final int REQUEST_CAR_CATEGORY = 5006;
 
 
     public static void showSnakBar(Context context, ViewGroup viewGroup, String message) {

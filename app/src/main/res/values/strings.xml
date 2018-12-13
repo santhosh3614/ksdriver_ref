@@ -64,6 +64,8 @@
     <string name="enter_car_no">Enter Car No</string>
     <string name="enter_car_model">Enter car model</string>
     <string name="licence_no">Licence No</string>
+    <string name="no_selected_file">No selected file now</string>
+    <string name="no_selected_file_">No selected file</string>
 
     <string-array name="Qnty">
         <item>1</item>

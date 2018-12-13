@@ -13,10 +13,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.ksdriverapp.R;
+import com.ksdriverapp.models.CarCategoryModel;
 import com.ksdriverapp.models.SignUpModel;
 import com.ksdriverapp.prefrences.SessionManager;
 import com.ksdriverapp.retrofit.WsFactory;
@@ -57,7 +57,7 @@ public class CarSignUpActivity extends BaseActivity implements WsResponse {
     private ArrayList<String> docImages = new ArrayList<>();
     private ImageView img1, img2, img3;
     private int id;
-
+    private TextView txtFileName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,9 +71,10 @@ public class CarSignUpActivity extends BaseActivity implements WsResponse {
     }
 
 
-    private void requestUploadSurvey() {
-
-
+    private void getCarCategory() {
+        progressDialog.show();
+        Call loginWsCall = WsFactory.getCarCategory();
+        WsUtils.getReponse(loginWsCall, StaticUtils.REQUEST_CAR_CATEGORY, this);
     }
 
 
@@ -91,6 +92,7 @@ public class CarSignUpActivity extends BaseActivity implements WsResponse {
         txtSelectCarId = findViewById(R.id.txtSelectCarId);
         edtLicenceNo = findViewById(R.id.edtLicenceNo);
         txtUpload = findViewById(R.id.txtUpload);
+        txtFileName = findViewById(R.id.txtFileName);
         img1 = findViewById(R.id.img1);
         img2 = findViewById(R.id.img2);
         img3 = findViewById(R.id.img3);
@@ -131,7 +133,6 @@ public class CarSignUpActivity extends BaseActivity implements WsResponse {
 
         img3.setOnClickListener(v -> {
             id = img3.getId();
-
             PoupUtils.showCameraAndGallery(this, "Choose option",
                     camera -> {
                         selectedValue = camera.getTag().toString();
@@ -148,8 +149,8 @@ public class CarSignUpActivity extends BaseActivity implements WsResponse {
 
         });
 
-
         txtUpload.setOnClickListener(v -> {
+            id = txtUpload.getId();
             PoupUtils.showCameraAndGallery(this, "Choose option",
                     camera -> {
                         selectedValue = camera.getTag().toString();
@@ -180,7 +181,7 @@ public class CarSignUpActivity extends BaseActivity implements WsResponse {
         });
 
         txtSelectCarId.setOnClickListener(v -> {
-
+            getCarCategory();
         });
 
         txtSubmit.setOnClickListener(v -> {
@@ -296,6 +297,9 @@ public class CarSignUpActivity extends BaseActivity implements WsResponse {
         } else if (id == R.id.img3) {
             img3.setImageURI(picUri);
             docImages.add(filePath);
+        } else if (id == R.id.txtUpload) {
+            String filename = filePath.substring(filePath.lastIndexOf("/") + 1);
+            txtFileName.setText(filename);
         }
     }
 
@@ -313,8 +317,10 @@ public class CarSignUpActivity extends BaseActivity implements WsResponse {
         } else if (id == R.id.img3) {
             img2.setImageBitmap(thumbnail);
             docImages.add(filePath);
+        } else if (id == R.id.txtUpload) {
+            String filename = filePath.substring(filePath.lastIndexOf("/") + 1);
+            txtFileName.setText(filename);
         }
-
     }
 
     @Override
@@ -325,6 +331,15 @@ public class CarSignUpActivity extends BaseActivity implements WsResponse {
                 SignUpModel signUpModel = (SignUpModel) response;
                 sessionManager.setUserId(signUpModel.getResponseData().getIDriverId() + "");
                 PoupUtils.showAlertDailog(this, signUpModel.getResponseMessage());
+                break;
+            case StaticUtils.REQUEST_CAR_CATEGORY:
+                CarCategoryModel categoryModel = (CarCategoryModel) response;
+                PoupUtils.showCarCategory(this, "Select your car category", categoryModel.getResponseData(), (v, pos) -> {
+                    CarCategoryModel.ResponseDatum responseDatum = categoryModel.getResponseData().get(pos);
+                    txtSelectCarId.setText(responseDatum.getVCar());
+                    carId = responseDatum.getICarCetegoryId() + "";
+                });
+                break;
         }
     }
 

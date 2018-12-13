@@ -1,17 +1,13 @@
 package com.ksdriverapp.retrofit;
 
-import com.ksdriverapp.models.CategoryModel;
+import com.ksdriverapp.models.CarCategoryModel;
 import com.ksdriverapp.models.SignUpModel;
-
-import org.json.JSONObject;
 
 import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.FieldMap;
 
 /**
  * Created by SONI on 9/30/2018.
@@ -52,16 +48,15 @@ public class WsFactory {
         return loginCall;
     }
 
-    public static Call signUp(MultipartBody.Part[] images,  MultipartBody.Part image, Map<String, RequestBody> map) {
+    public static Call signUp(MultipartBody.Part[] images, MultipartBody.Part image, Map<String, RequestBody> map) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<SignUpModel> loginCall = apiService.carSignUp(images,image, map);
+        Call<SignUpModel> loginCall = apiService.carSignUp(images, image, map);
         return loginCall;
     }
 
-
-    public static Call getCategory(@FieldMap Map<String, String> fields) {
+    public static Call getCarCategory() {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<CategoryModel> category = apiService.getCategory(fields);
+        Call<CarCategoryModel> category = apiService.getCarCategory();
         return category;
     }
 

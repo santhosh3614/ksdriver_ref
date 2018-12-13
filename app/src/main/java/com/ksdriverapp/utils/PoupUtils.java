@@ -6,15 +6,22 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ksdriverapp.R;
+import com.ksdriverapp.adapter.CarCategoryAdapter;
+import com.ksdriverapp.listeners.RvClickListeners;
+import com.ksdriverapp.models.CarCategoryModel;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class PoupUtils {
@@ -47,20 +54,43 @@ public class PoupUtils {
         dialog.getWindow().setBackgroundDrawableResource(R.color.black_tran_60);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.layout_camera_galary_dialog);
-        TextView txtCamera = dialog.findViewById(R.id.txtCamera);
-        TextView txtGallery = dialog.findViewById(R.id.txtGallery);
+
+        ImageView imgCamera = dialog.findViewById(R.id.imgCamera);
+        ImageView imgGallary = dialog.findViewById(R.id.imgGallary);
         TextView txtTitle = dialog.findViewById(R.id.txtTitle);
         txtTitle.setText(message);
-        txtCamera.setOnClickListener(v -> {
-            txtCamera.setTag("Take Photo");
+
+        imgCamera.setOnClickListener(v -> {
+            imgCamera.setTag("Take Photo");
             dialog.cancel();
-            cameraClick.onClick(txtCamera);
+            cameraClick.onClick(imgCamera);
         });
-        txtGallery.setOnClickListener(v -> {
-            txtGallery.setTag("Choose from Library");
+        imgGallary.setOnClickListener(v -> {
+            imgGallary.setTag("Choose from Library");
             dialog.cancel();
-            galleryClick.onClick(txtGallery);
+            galleryClick.onClick(imgGallary);
         });
+        dialog.show();
+    }
+
+    public static void showCarCategory(Activity activity, String message,
+                                       List<CarCategoryModel.ResponseDatum> responseData,
+                                       RvClickListeners rvClickListeners) {
+
+        final Dialog dialog = new Dialog(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.black_tran_60);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.layout_category_car);
+        RecyclerView rvCarList = dialog.findViewById(R.id.rvCarList);
+        rvCarList.setLayoutManager(new LinearLayoutManager(activity));
+        CarCategoryAdapter carCategoryAdapter = new CarCategoryAdapter(activity, responseData, (v, pos) -> {
+            rvClickListeners.onItemclick(v, pos);
+            dialog.cancel();
+        });
+        rvCarList.setAdapter(carCategoryAdapter);
+        TextView txtTitle = dialog.findViewById(R.id.txtTitle);
+        txtTitle.setText(message);
         dialog.show();
     }
 
