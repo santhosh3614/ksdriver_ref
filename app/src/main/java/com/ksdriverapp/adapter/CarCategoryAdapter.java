@@ -9,11 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.ksdriverapp.R;
 import com.ksdriverapp.listeners.RvClickListeners;
 import com.ksdriverapp.models.CarCategoryModel;
+
 import java.util.List;
 
 public class CarCategoryAdapter extends RecyclerView.Adapter<CarCategoryAdapter.CarHolder> {
@@ -41,9 +42,7 @@ public class CarCategoryAdapter extends RecyclerView.Adapter<CarCategoryAdapter.
     public void onBindViewHolder(@NonNull CarHolder holder, int position) {
         CarCategoryModel.ResponseDatum responseDatum = responseData.get(position);
         Glide.with(context).load(responseDatum.getVCarImage())
-                .apply(new RequestOptions()
-                        .placeholder(R.drawable.car)
-                        .error(R.drawable.car))
+                .placeholder(R.drawable.car)
                 .into(holder.imgCar);
         holder.txtCar.setText(responseDatum.getVCar());
         holder.rlItemCar.setOnClickListener(v -> {

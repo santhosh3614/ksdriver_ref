@@ -1,13 +1,16 @@
 package com.ksdriverapp.retrofit;
 
 import com.ksdriverapp.models.CarCategoryModel;
+import com.ksdriverapp.models.OnlineOffline;
 import com.ksdriverapp.models.SignUpModel;
 
+import java.util.Calendar;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.FieldMap;
 
 /**
  * Created by SONI on 9/30/2018.
@@ -58,6 +61,12 @@ public class WsFactory {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<CarCategoryModel> category = apiService.getCarCategory();
         return category;
+    }
+
+    public static  Call onlineOffline( Map<String, String> map) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<OnlineOffline> onlineOfflineCall = apiService.onlineOffline(map);
+        return onlineOfflineCall;
     }
 
 

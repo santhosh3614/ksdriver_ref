@@ -29,28 +29,7 @@
 
 
         <EditText
-            android:id="@+id/edtFirstName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_7sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_7sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/user"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
-            android:hint="@string/first_name"
-            android:inputType="text"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
-
-
-        <EditText
-            android:id="@+id/edtLastName"
+            android:id="@+id/edtFullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_8sdp"
@@ -62,7 +41,7 @@
             android:drawablePadding="@dimen/_10sdp"
             android:fontFamily="@font/opensans_regular"
             android:gravity="center_vertical"
-            android:hint="@string/last_name"
+            android:hint="@string/full_name"
             android:inputType="textEmailAddress"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/gray_text_color"
@@ -127,7 +106,8 @@
             android:padding="@dimen/_10sdp"
             android:textColor="@color/gray_text_color"
             android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/edtCity"
@@ -151,7 +131,7 @@
 
 
         <EditText
-            android:id="@+id/edtCarModel"
+            android:id="@+id/edtLicenceNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_8sdp"
@@ -199,13 +179,14 @@
             android:layout_marginRight="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:background="@drawable/bg_text_area"
-            android:drawableLeft="@drawable/email"
             android:drawablePadding="@dimen/_10sdp"
             android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
+            android:gravity="top"
             android:hint="Address"
             android:lines="3"
             android:padding="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
             android:textColor="@color/gray_text_color"
             android:textColorHint="@color/gray_text_color"
             android:textSize="16sp" />
@@ -214,6 +195,8 @@
             android:id="@+id/txtUpload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/bg_blue_button"
             android:fontFamily="@font/opensans_regular"
             android:paddingBottom="@dimen/_10sdp"
@@ -222,7 +205,8 @@
             android:paddingTop="@dimen/_10sdp"
             android:text="Uplaod Doc"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
 
 
         <RelativeLayout
@@ -230,19 +214,19 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp">
+            android:layout_marginTop="@dimen/_15sdp">
 
 
             <TextView
                 android:id="@+id/txtSubmit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/bg_yello_button"
                 android:fontFamily="@font/opensans_regular"
                 android:paddingBottom="@dimen/_10sdp"
                 android:paddingLeft="@dimen/_30sdp"
                 android:paddingRight="@dimen/_30sdp"
-                android:layout_centerHorizontal="true"
                 android:paddingTop="@dimen/_10sdp"
                 android:text="Submit"
                 android:textColor="@color/white"

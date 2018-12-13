@@ -230,7 +230,6 @@ public class CarSignUpActivity extends BaseActivity implements WsResponse {
                     RequestBody docBody = RequestBody.create(MediaType.parse("image/*"), file);
                     surveyImagesParts[index] = MultipartBody.Part.createFormData("vDocumentImage", fileArray.getName(), docBody);
                 }
-
                 Map<String, RequestBody> map = new HashMap<>();
                 map.put("iCarCetegoryId", iCarCetegoryId);
                 map.put("vCarNumber", vCarNumber);

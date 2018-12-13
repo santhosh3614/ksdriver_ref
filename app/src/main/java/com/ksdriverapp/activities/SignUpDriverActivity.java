@@ -44,7 +44,7 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
     private static final int REQUEST_CAMERA = 1001;
     private static final int SELECT_FILE = 1002;
     private ImageView imgProfile;
-    private EditText edtFirstName, edtLastName, edtMobile, edtEmail, edtState, edtCarNo, edtCarModel, edtAddress;
+    private EditText edtFullName, edtMobile, edtEmail, edtCity, edtAddress, edtLicenceNo, edtExpr;
     private TextView txtSubmit;
     private String selectedValue;
     private String filePath = "";
@@ -65,15 +65,17 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
 
     @Override
     public void initComponents() {
-        edtFirstName = findViewById(R.id.edtFirstName);
-        edtLastName = findViewById(R.id.edtLastName);
+
+        edtFullName = findViewById(R.id.edtFullName);
         edtMobile = findViewById(R.id.edtMobile);
         edtEmail = findViewById(R.id.edtEmail);
-        edtState = findViewById(R.id.edtState);
-        edtCarModel = findViewById(R.id.edtCarModel);
+        edtCity = findViewById(R.id.edtCity);
+        edtAddress = findViewById(R.id.edtAddress);
+        edtLicenceNo = findViewById(R.id.edtLicenceNo);
+        edtExpr = findViewById(R.id.edtExpr);
+
         txtSubmit = findViewById(R.id.txtSubmit);
         imgProfile = findViewById(R.id.imgProfile);
-        edtAddress = findViewById(R.id.edtAddress);
         progressDialog = new SpotsDialog(this, R.style.Custom);
         sessionManager = new SessionManager(this);
 
@@ -87,30 +89,34 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                     },
                     gallary -> {
                         selectedValue = gallary.getTag().toString();
-                        galleryIntent();
+                        boolean result = PermisionUtils.checkPermission(this);
+                        if (result)
+                            galleryIntent();
                     });
         });
 
         txtSubmit.setOnClickListener(v -> {
-            String firstName = edtFirstName.getText().toString().trim();
-            String lastName = edtLastName.getText().toString().trim();
+            String fullName = edtFullName.getText().toString().trim();
             String mobile = edtMobile.getText().toString().trim();
             String email = edtEmail.getText().toString().trim();
-            String state = edtState.getText().toString().trim();
-            String carModel = edtCarModel.getText().toString().trim();
+            String city = edtCity.getText().toString().trim();
+            String licNo = edtLicenceNo.getText().toString().trim();
             String address = edtAddress.getText().toString().trim();
-            if (TextUtils.isEmpty(firstName)) {
+            String expr = edtExpr.getText().toString().trim();
+
+
+            if (TextUtils.isEmpty(fullName)) {
                 PoupUtils.showAlertDailog(this, "Enter First Name");
-            } else if (TextUtils.isEmpty(lastName)) {
-                PoupUtils.showAlertDailog(this, "Enter Last Name");
             } else if (TextUtils.isEmpty(mobile)) {
                 PoupUtils.showAlertDailog(this, "Enter Mobile");
             } else if (TextUtils.isEmpty(email)) {
                 PoupUtils.showAlertDailog(this, "Enter email");
-            } else if (TextUtils.isEmpty(state)) {
-                PoupUtils.showAlertDailog(this, "Enter state");
-            } else if (TextUtils.isEmpty(carModel)) {
-                PoupUtils.showAlertDailog(this, "Enter car model");
+            } else if (TextUtils.isEmpty(city)) {
+                PoupUtils.showAlertDailog(this, "Enter city");
+            } else if (TextUtils.isEmpty(licNo)) {
+                PoupUtils.showAlertDailog(this, "Enter licNo");
+            } else if (TextUtils.isEmpty(expr)) {
+                PoupUtils.showAlertDailog(this, "Enter Exprence.");
             } else if (TextUtils.isEmpty(address)) {
                 PoupUtils.showAlertDailog(this, "Enter Address");
             } else if (TextUtils.isEmpty(filePath)) {
@@ -120,32 +126,25 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                 progressDialog.show();
                 File file = new File(filePath);
                 RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
-                MultipartBody.Part body = MultipartBody.Part.createFormData("vLicenceImage", file.getName(), reqFile);
+                MultipartBody.Part body = MultipartBody.Part.createFormData("vDriverImage", file.getName(), reqFile);
 
-                RequestBody vDriverName = RequestBody.create(MediaType.parse("text/plain"), firstName + " " + lastName);
-                RequestBody iCarCetegoryId = RequestBody.create(MediaType.parse("text/plain"), "2");
-                RequestBody vCarNumber = RequestBody.create(MediaType.parse("text/plain"), "sdfsdf154451");
-                RequestBody iCarModel = RequestBody.create(MediaType.parse("text/plain"), "2016");
-                RequestBody vLicenceNumber = RequestBody.create(MediaType.parse("text/plain"), "sdfsdf564645");
-                RequestBody iDriverContactNo = RequestBody.create(MediaType.parse("text/plain"), "123456789");
-                RequestBody txDriverAddress = RequestBody.create(MediaType.parse("text/plain"), "asdfasdfgsdfgdfgsdfg");
-                RequestBody iDriverAlterContactNo = RequestBody.create(MediaType.parse("text/plain"), "315648474654");
-                RequestBody vDriverEmail = RequestBody.create(MediaType.parse("text/plain"), "dhgfg@gmail.com");
-                RequestBody vDriverExp = RequestBody.create(MediaType.parse("text/plain"), "5 yr");
-                RequestBody vCity = RequestBody.create(MediaType.parse("text/plain"), "Ahemdabad");
+                RequestBody vDriverName = RequestBody.create(MediaType.parse("text/plain"), fullName);
+                RequestBody vLicenceNumber = RequestBody.create(MediaType.parse("text/plain"), licNo);
+                RequestBody iDriverContactNo = RequestBody.create(MediaType.parse("text/plain"), mobile);
+                RequestBody txDriverAddress = RequestBody.create(MediaType.parse("text/plain"), address);
+                RequestBody vDriverEmail = RequestBody.create(MediaType.parse("text/plain"), email);
+                RequestBody vDriverExp = RequestBody.create(MediaType.parse("text/plain"), expr);
+                RequestBody vCity = RequestBody.create(MediaType.parse("text/plain"), city);
 
                 Map<String, RequestBody> map = new HashMap<>();
                 map.put("vDriverName", vDriverName);
-                map.put("iCarCetegoryId", iCarCetegoryId);
-                map.put("vCarNumber", vCarNumber);
-                map.put("iCarModel", iCarModel);
                 map.put("vLicenceNumber", vLicenceNumber);
                 map.put("iDriverContactNo", iDriverContactNo);
                 map.put("txDriverAddress", txDriverAddress);
-                map.put("iDriverAlterContactNo", iDriverAlterContactNo);
                 map.put("vDriverEmail", vDriverEmail);
                 map.put("vDriverExp", vDriverExp);
                 map.put("vCity", vCity);
+
                 Call loginWsCall = WsFactory.signUp(body, map);
                 WsUtils.getReponse(loginWsCall, StaticUtils.REQUEST_SIGN_UP, this);
             }
@@ -218,7 +217,7 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-          }
+        }
     }
 
     @Override

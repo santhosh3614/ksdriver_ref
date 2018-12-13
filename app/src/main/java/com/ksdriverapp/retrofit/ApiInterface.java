@@ -1,6 +1,7 @@
 package com.ksdriverapp.retrofit;
 
 import com.ksdriverapp.models.CarCategoryModel;
+import com.ksdriverapp.models.OnlineOffline;
 import com.ksdriverapp.models.SignUpModel;
 
 import java.util.Map;
@@ -8,6 +9,8 @@ import java.util.Map;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -89,7 +92,6 @@ private void requestUploadSurvey() {
  }
     */
 
-
     @Multipart
     @POST("oauth/driversignup")
     Call<SignUpModel> signUp(@Part MultipartBody.Part image, @PartMap Map<String, RequestBody> map);
@@ -100,5 +102,10 @@ private void requestUploadSurvey() {
 
     @GET("site/getcarcategory")
     Call<CarCategoryModel> getCarCategory();
+
+    @FormUrlEncoded
+    @POST("oauth/driveronlineoffline")
+    Call<OnlineOffline> onlineOffline(@FieldMap Map<String, String> fields);
+
 
 }
