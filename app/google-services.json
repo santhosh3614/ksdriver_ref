@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "240022317561",
+    "firebase_url": "https://ksdriver-8e70c.firebaseio.com",
+    "project_id": "ksdriver-8e70c",
+    "storage_bucket": "ksdriver-8e70c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240022317561:android:5f0114e2b6dd0d2d",
+        "android_client_info": {
+          "package_name": "com.ksdriver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240022317561-1g50bf9pa9fvov8cce4lpjoid6s6mikn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ksdriver",
+            "certificate_hash": "d807bbebee130a2383e6fb23579b5e4d2ec2b034"
+          }
+        },
+        {
+          "client_id": "240022317561-9lmi0addslr1j3ub874cgfqun5civud9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChRxuUKH4hn10NdUK0jXiScuNhDTDZ0dE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240022317561-9lmi0addslr1j3ub874cgfqun5civud9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

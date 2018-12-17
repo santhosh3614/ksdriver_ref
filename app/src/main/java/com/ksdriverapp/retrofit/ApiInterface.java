@@ -107,5 +107,9 @@ private void requestUploadSurvey() {
     @POST("oauth/driveronlineoffline")
     Call<OnlineOffline> onlineOffline(@FieldMap Map<String, String> fields);
 
+    @FormUrlEncoded
+    @POST("oauth/getdriverdetail")
+    Call<SignUpModel> getProfile(@FieldMap Map<String, String> fields);
+
 
 }

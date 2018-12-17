@@ -63,9 +63,15 @@ public class WsFactory {
         return category;
     }
 
-    public static  Call onlineOffline( Map<String, String> map) {
+    public static Call onlineOffline(Map<String, String> map) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<OnlineOffline> onlineOfflineCall = apiService.onlineOffline(map);
+        return onlineOfflineCall;
+    }
+
+    public static Call profile(Map<String, String> map) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<SignUpModel> onlineOfflineCall = apiService.getProfile(map);
         return onlineOfflineCall;
     }
 

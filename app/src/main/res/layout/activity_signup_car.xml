@@ -108,7 +108,7 @@
             android:fontFamily="@font/opensans_regular"
             android:gravity="center_vertical"
             android:hint="@string/mobile"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             android:padding="@dimen/_10sdp"
             android:textColor="@color/gray_text_color"
             android:textColorHint="@color/gray_text_color"

@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-
 import com.ksdriverapp.KSDriverApp;
 import com.ksdriverapp.activities.SignUpDriverActivity;
 
 import java.util.HashMap;
+
 
 public class SessionManager {
 
@@ -39,6 +39,8 @@ public class SessionManager {
     private static final String KEY_DELIVERY_POLICY = "delivey_policy";
     private static final String KEY_PAYMENT_POLICY = "payment_policy";
     private static final String KEY_CART_ITEM = "cartItem";
+    private static final String KEY_ONLINE_OFFLINE = "online_offline";
+    private static final String KYE_TOKEN = "token";
 
 
     // Constructor
@@ -55,6 +57,24 @@ public class SessionManager {
 
     public boolean getIsAddress() {
         return pref.getBoolean(KEY_IS_ADDRESS, false);
+    }
+
+    public void setNotificationToken(String token) {
+        editor.putString(KYE_TOKEN, token);
+        editor.commit();
+    }
+
+    public String getNotificationToken() {
+        return pref.getString(KYE_TOKEN, "");
+    }
+
+    public void setOnlineOfline(String onlineOfline) {
+        editor.putString(KEY_ONLINE_OFFLINE, onlineOfline);
+        editor.commit();
+    }
+
+    public String getOnlineOfline() {
+        return pref.getString(KEY_ONLINE_OFFLINE, "");
     }
 
 

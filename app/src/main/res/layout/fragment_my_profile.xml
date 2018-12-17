@@ -27,83 +27,13 @@
             android:text="sdasd" />
 
         <TextView
+            android:id="@+id/txtDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="sdasd" />
 
-        <ImageView
-            android:id="@+id/imgOnnOffDuaty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/selector_button" />
-
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:text="Plan your work" />
-
-
-    <EditText
-        android:id="@+id/edtStartTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_7sdp"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_7sdp"
-        android:background="@drawable/bg_edit_text"
-        android:drawableLeft="@drawable/user"
-        android:drawablePadding="@dimen/_10sdp"
-        android:editable="false"
-        android:fontFamily="@font/opensans_regular"
-        android:gravity="center_vertical"
-        android:hint="@string/start_time"
-        android:inputType="text"
-        android:padding="@dimen/_10sdp"
-        android:textColor="@color/gray_text_color"
-        android:textColorHint="@color/gray_text_color"
-        android:textSize="16sp" />
-
-    <EditText
-        android:id="@+id/edtEndTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_7sdp"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_7sdp"
-        android:background="@drawable/bg_edit_text"
-        android:drawableLeft="@drawable/user"
-        android:drawablePadding="@dimen/_10sdp"
-        android:editable="false"
-        android:fontFamily="@font/opensans_regular"
-        android:gravity="center_vertical"
-        android:hint="@string/end_time"
-        android:inputType="text"
-        android:padding="@dimen/_10sdp"
-        android:textColor="@color/gray_text_color"
-        android:textColorHint="@color/gray_text_color"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/txtSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/bg_yello_button"
-        android:fontFamily="@font/opensans_regular"
-        android:paddingBottom="@dimen/_10sdp"
-        android:paddingLeft="@dimen/_30sdp"
-        android:paddingRight="@dimen/_30sdp"
-        android:paddingTop="@dimen/_10sdp"
-        android:text="@string/apply_on_duty"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
 
 </LinearLayout>

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by SONI on 12/6/2018.
  */
 
-public    class SignUpModel   {
+public class SignUpModel {
 
     @SerializedName("responseCode")
     @Expose
@@ -90,6 +90,18 @@ public    class SignUpModel   {
         @SerializedName("vLicenceImage")
         @Expose
         private String vLicenceImage;
+        @SerializedName("vDriverImage")
+        @Expose
+        private String vDriverImage;
+
+
+        public String getvDriverImage() {
+            return vDriverImage;
+        }
+
+        public void setvDriverImage(String vDriverImage) {
+            this.vDriverImage = vDriverImage;
+        }
 
         public String getVDriverName() {
             return vDriverName;

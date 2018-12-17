@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ksdriverapp.R;
-import com.ksdriverapp.models.OnlineOffline;
+import com.ksdriverapp.activities.MainActivity;
+import com.ksdriverapp.models.SignUpModel;
 import com.ksdriverapp.prefrences.SessionManager;
 import com.ksdriverapp.retrofit.WsFactory;
 import com.ksdriverapp.retrofit.WsResponse;
@@ -23,36 +25,38 @@ import java.util.HashMap;
 import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 
+/**
+ * Created by SONI on 12/14/2018.
+ */
+
 public class MyProfileFragment extends BaseFragment implements WsResponse {
 
-    public static String TAG = MyProfileFragment.class.getSimpleName();
-    private ImageView imgOnnOffDuaty;
-    private TextView txtSubmit;
-    private int onlineOffline = 1;
+    private ImageView imgProfile;
+    private TextView txtName, txtDate;
     private SessionManager sessionManager;
     private AlertDialog progressDialog;
+    private MainActivity mainActivity;
 
-
-    public static MyProfileFragment getInstance(Bundle bundle) {
+    public static MyProfileFragment getInstance() {
         MyProfileFragment myProfileFragment = new MyProfileFragment();
-        myProfileFragment.setArguments(bundle);
         return myProfileFragment;
     }
 
+    public static String TAG = MyProfileFragment.class.getSimpleName();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.fragment_my_profile, container, false);
-
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        imgOnnOffDuaty = view.findViewById(R.id.imgOnnOffDuaty);
-        txtSubmit = view.findViewById(R.id.txtSubmit);
+        imgProfile = view.findViewById(R.id.imgProfile);
+        txtName = view.findViewById(R.id.txtName);
+        txtDate = view.findViewById(R.id.txtDate);
         try {
             init();
         } catch (Exception e) {
@@ -62,48 +66,39 @@ public class MyProfileFragment extends BaseFragment implements WsResponse {
 
     @Override
     public void init() {
-        sessionManager = new SessionManager(getContext());
+        mainActivity = (MainActivity) getActivity();
+        sessionManager = new SessionManager(mainActivity);
         progressDialog = new SpotsDialog(getContext(), R.style.Custom);
-        imgOnnOffDuaty.setOnClickListener(v -> {
-            if (imgOnnOffDuaty.isSelected()) {
-                imgOnnOffDuaty.setSelected(false);
-                onlineOffline = 1;
-            } else {
-                imgOnnOffDuaty.setSelected(true);
-                onlineOffline = 1;
-            }
-        });
+        getProfile();
+    }
 
-        txtSubmit.setOnClickListener(v -> {
-            progressDialog.show();
-            HashMap<String, String> map = new HashMap<>();
-            map.put("iDriverId", sessionManager.getUserId());
-            map.put("tiOnlineStatus", onlineOffline + "");
-            Call callOnlineOffline = WsFactory.onlineOffline(map);
-            WsUtils.getReponse(callOnlineOffline, StaticUtils.REQUEST_ONLINE_OFFLINE, this);
-        });
+    private void getProfile() {
+        progressDialog.show();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("iDriverId", sessionManager.getUserId());
+        Call callOnlineOffline = WsFactory.profile(map);
+        WsUtils.getReponse(callOnlineOffline, StaticUtils.REQUEST_PROFILE, this);
     }
 
     @Override
     public void successResponse(Object response, int code) {
         progressDialog.cancel();
         switch (code) {
-            case StaticUtils.REQUEST_ONLINE_OFFLINE:
-                OnlineOffline onlineOffline = (OnlineOffline) response;
-
-
-
-                break;
-            default:
-                break;
-
+            case StaticUtils.REQUEST_PROFILE:
+                SignUpModel signUpModel = (SignUpModel) response;
+                if (signUpModel != null) {
+                    SignUpModel.ResponseData responseData = signUpModel.getResponseData();
+                    Glide.with(mainActivity).load(responseData.getvDriverImage()).into(imgProfile);
+                    txtName.setText(responseData.getVDriverName());
+                    txtDate.setText(responseData.getDtCreatedAt());
+                }
         }
-
     }
 
     @Override
     public void failureRespons(Throwable error, int code) {
         progressDialog.cancel();
-
     }
+
+
 }

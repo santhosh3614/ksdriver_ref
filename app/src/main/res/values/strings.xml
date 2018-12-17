@@ -66,6 +66,7 @@
     <string name="licence_no">Licence No</string>
     <string name="no_selected_file">No selected file now</string>
     <string name="no_selected_file_">No selected file</string>
+    <string name="payment_history">Payment History</string>
 
     <string-array name="Qnty">
         <item>1</item>
