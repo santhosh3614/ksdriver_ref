@@ -3,13 +3,12 @@ package com.ksdriverapp.activities;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.ksdriverapp.R;
-import com.ksdriverapp.fragments.MyProfileFragment;
 import com.ksdriverapp.fragments.OnlieOffLineFragment;
 import com.ksdriverapp.fragments.PaymetHistoryFragment;
 
@@ -50,21 +49,20 @@ public class MainActivity extends BaseActivity {
         llProfie.setOnClickListener(v -> {
             closeDrawer();
             Bundle bundle = new Bundle();
-            replaceFragmenr(MyProfileFragment.getInstance(), MyProfileFragment.TAG);
+            replaceFragmenr(OnlieOffLineFragment.getInstance(bundle), OnlieOffLineFragment.TAG);
         });
         try {
             defaultCall();
-        } catch (Exception e) {
+          } catch (Exception e) {
             e.printStackTrace();
-        }
-
+         }
     }
 
     private void defaultCall() {
 
         txtPaymentHistoy.setOnClickListener(v -> {
             replaceFragmenr(PaymetHistoryFragment.getInstance(), PaymetHistoryFragment.TAG);
-         });
+        });
 
 
         txtSupport.setOnClickListener(v -> {

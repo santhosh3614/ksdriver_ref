@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-
 import com.ksdriverapp.R;
 import com.ksdriverapp.prefrences.SessionManager;
 
@@ -32,12 +31,12 @@ public class SplashActivity extends BaseActivity {
             public void run() {
                 SessionManager sessionManager = new SessionManager(SplashActivity.this);
                 if (sessionManager.getUserId().equalsIgnoreCase("-1")) {
-                    Intent intent = new Intent(SplashActivity.this, OptionActivity.class);
+                    Intent intent = new Intent(SplashActivity.this,SignUpDriverActivity.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 } else {
-                    Intent intent = new Intent(SplashActivity.this, OptionActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.ksdriverapp.R;
 import com.ksdriverapp.activities.MainActivity;
 import com.ksdriverapp.models.OnlineOffline;
@@ -18,7 +19,9 @@ import com.ksdriverapp.retrofit.WsFactory;
 import com.ksdriverapp.retrofit.WsResponse;
 import com.ksdriverapp.retrofit.WsUtils;
 import com.ksdriverapp.utils.StaticUtils;
+
 import java.util.HashMap;
+
 import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 
@@ -80,15 +83,18 @@ public class OnlieOffLineFragment extends BaseFragment implements WsResponse {
                 onlineOffline = 1;
             }
         });
-
         txtSubmit.setOnClickListener(v -> {
-            progressDialog.show();
-            HashMap<String, String> map = new HashMap<>();
-            map.put("iDriverId", sessionManager.getUserId());
-            map.put("tiOnlineStatus", onlineOffline + "");
-            Call callOnlineOffline = WsFactory.onlineOffline(map);
-            WsUtils.getReponse(callOnlineOffline, StaticUtils.REQUEST_ONLINE_OFFLINE, this);
+            mainActivity.replaceFragmenr(WelcomeScreenFragment.getInstance(), WelcomeScreenFragment.TAG);
         });
+    }
+
+    private void onlineoffline() {
+        progressDialog.show();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("iDriverId", sessionManager.getUserId());
+        map.put("tiOnlineStatus", onlineOffline + "");
+        Call callOnlineOffline = WsFactory.onlineOffline(map);
+        WsUtils.getReponse(callOnlineOffline, StaticUtils.REQUEST_ONLINE_OFFLINE, this);
     }
 
     @Override

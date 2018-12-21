@@ -18,22 +18,12 @@ import android.widget.TextView;
 import com.ksdriverapp.R;
 import com.ksdriverapp.models.SignUpModel;
 import com.ksdriverapp.prefrences.SessionManager;
-import com.ksdriverapp.retrofit.WsFactory;
 import com.ksdriverapp.retrofit.WsResponse;
-import com.ksdriverapp.retrofit.WsUtils;
 import com.ksdriverapp.utils.PermisionUtils;
 import com.ksdriverapp.utils.PoupUtils;
 import com.ksdriverapp.utils.StaticUtils;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
 import dmax.dialog.SpotsDialog;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
 
 /**
  * Created by SONI on 11/29/2018.
@@ -122,12 +112,10 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
             } else if (TextUtils.isEmpty(filePath)) {
                 PoupUtils.showAlertDailog(this, "Please select picture");
             } else {
-//                startActivity(new Intent(this, MainActivity.class));
-                progressDialog.show();
+                /* progressDialog.show();
                 File file = new File(filePath);
                 RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
                 MultipartBody.Part body = MultipartBody.Part.createFormData("vDriverImage", file.getName(), reqFile);
-
                 RequestBody vDriverName = RequestBody.create(MediaType.parse("text/plain"), fullName);
                 RequestBody vLicenceNumber = RequestBody.create(MediaType.parse("text/plain"), licNo);
                 RequestBody iDriverContactNo = RequestBody.create(MediaType.parse("text/plain"), mobile);
@@ -135,7 +123,6 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                 RequestBody vDriverEmail = RequestBody.create(MediaType.parse("text/plain"), email);
                 RequestBody vDriverExp = RequestBody.create(MediaType.parse("text/plain"), expr);
                 RequestBody vCity = RequestBody.create(MediaType.parse("text/plain"), city);
-
                 Map<String, RequestBody> map = new HashMap<>();
                 map.put("vDriverName", vDriverName);
                 map.put("vLicenceNumber", vLicenceNumber);
@@ -144,9 +131,9 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                 map.put("vDriverEmail", vDriverEmail);
                 map.put("vDriverExp", vDriverExp);
                 map.put("vCity", vCity);
-
                 Call loginWsCall = WsFactory.signUp(body, map);
-                WsUtils.getReponse(loginWsCall, StaticUtils.REQUEST_SIGN_UP, this);
+                WsUtils.getReponse(loginWsCall, StaticUtils.REQUEST_SIGN_UP, this);*/
+                startActivity(new Intent(this, MainActivity.class));
             }
         });
     }
