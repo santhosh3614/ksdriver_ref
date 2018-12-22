@@ -16,8 +16,10 @@ public class MainActivity extends BaseActivity {
 
     private LinearLayout llProfie;
     private DrawerLayout drawer;
-    private ImageView imgMenu, imgProfile;
+    private ImageView imgProfile;
     private TextView txtPaymentHistoy, txtSupport, txtTermAndCond, txtRegisterCar, txtLogOut;
+    public ImageView imgMenu, imgNotification, imgBack;
+    public TextView txtTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,9 @@ public class MainActivity extends BaseActivity {
         txtTermAndCond = findViewById(R.id.txtTermAndCond);
         txtRegisterCar = findViewById(R.id.txtRegisterCar);
         txtLogOut = findViewById(R.id.txtLogOut);
+        imgBack = findViewById(R.id.imgBack);
+        imgNotification = findViewById(R.id.imgNotification);
+        txtTitle = findViewById(R.id.txtTitle);
 
         imgMenu.setOnClickListener(v -> {
             drawer.openDrawer(Gravity.START);
@@ -53,9 +58,9 @@ public class MainActivity extends BaseActivity {
         });
         try {
             defaultCall();
-          } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-         }
+        }
     }
 
     private void defaultCall() {
@@ -78,7 +83,6 @@ public class MainActivity extends BaseActivity {
         txtLogOut.setOnClickListener(v -> {
 
         });
-
 
         Bundle bundle = new Bundle();
         replaceFragmenr(OnlieOffLineFragment.getInstance(bundle), OnlieOffLineFragment.TAG);

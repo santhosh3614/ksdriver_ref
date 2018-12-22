@@ -60,13 +60,21 @@ public class OnlieOffLineFragment extends BaseFragment implements WsResponse {
         }
     }
 
+    private void setHeader() {
+        mainActivity = (MainActivity) getActivity();
+        mainActivity.imgBack.setVisibility(View.GONE);
+        mainActivity.imgMenu.setVisibility(View.VISIBLE);
+        mainActivity.txtTitle.setText("My Profile");
+    }
+
+
     @Override
     public void init() {
         mainActivity = (MainActivity) getActivity();
         sessionManager = new SessionManager(mainActivity);
         progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
         String onlineofline = sessionManager.getOnlineOfline();
-
+        setHeader();
         if (TextUtils.isEmpty(onlineofline)) {
             if (onlineofline.equalsIgnoreCase("1")) {
                 imgOnnOffDuaty.setSelected(true);
