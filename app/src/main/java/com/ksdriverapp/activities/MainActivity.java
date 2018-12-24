@@ -1,6 +1,7 @@
 package com.ksdriverapp.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
@@ -52,7 +53,7 @@ public class MainActivity extends BaseActivity {
         });
 
         llProfie.setOnClickListener(v -> {
-            closeDrawer();
+            closeNavigation();
             Bundle bundle = new Bundle();
             replaceFragmenr(OnlieOffLineFragment.getInstance(bundle), OnlieOffLineFragment.TAG);
         });
@@ -90,17 +91,21 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        int count = fragmentManager.getBackStackEntryCount();
+        String fragmentTag = fragmentManager.getBackStackEntryAt(count - 1).getName();
+        if (fragmentTag.equalsIgnoreCase(OnlieOffLineFragment.TAG)) {
             super.onBackPressed();
+        } else {
+            fragmentManager.popBackStackImmediate();
         }
     }
 
-    private void closeDrawer() {
+    private void closeNavigation() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
     }
+
 
 }

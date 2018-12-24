@@ -1,8 +1,10 @@
 package com.ksdriverapp.retrofit;
 
 import com.ksdriverapp.models.CarCategoryModel;
+import com.ksdriverapp.models.CityListModel;
 import com.ksdriverapp.models.OnlineOffline;
 import com.ksdriverapp.models.SignUpModel;
+import com.ksdriverapp.models.StateModel;
 
 import java.util.Calendar;
 import java.util.Map;
@@ -72,6 +74,18 @@ public class WsFactory {
     public static Call profile(Map<String, String> map) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<SignUpModel> onlineOfflineCall = apiService.getProfile(map);
+        return onlineOfflineCall;
+    }
+
+    public static Call getSatate() {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<StateModel> onlineOfflineCall = apiService.stateList();
+        return onlineOfflineCall;
+    }
+
+    public static Call getCityState(Map<String, String> map) {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<CityListModel> onlineOfflineCall = apiService.cityList(map);
         return onlineOfflineCall;
     }
 

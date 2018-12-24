@@ -39,6 +39,9 @@ public class StaticUtils {
     public static final int REQUEST_CAR_CATEGORY = 5006;
     public static final int REQUEST_ONLINE_OFFLINE = 5007;
     public static final int REQUEST_PROFILE = 5008;
+    public static final int REQUEST_STATE_LIST = 5009;
+    public static final int REQUEST_STATE_CITY = 5010;
+
 
 
 

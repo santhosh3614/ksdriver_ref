@@ -29,14 +29,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Created Date" />
+            android:text="25-05-2018 03:00 PM" />
 
         <ImageView
             android:id="@+id/imgOnnOffDuaty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/selector_button" />
+            android:background="@drawable/selector_button"
+            android:padding="@dimen/_5sdp" />
 
 
     </LinearLayout>
@@ -59,9 +60,9 @@
         android:layout_marginBottom="@dimen/_7sdp"
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_marginRight="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/bg_edit_text"
-        android:drawableLeft="@drawable/user"
+        android:drawableLeft="@drawable/time"
         android:drawablePadding="@dimen/_10sdp"
         android:fontFamily="@font/opensans_regular"
         android:gravity="center_vertical"
@@ -80,7 +81,7 @@
         android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_7sdp"
         android:background="@drawable/bg_edit_text"
-        android:drawableLeft="@drawable/user"
+        android:drawableLeft="@drawable/time"
         android:drawablePadding="@dimen/_10sdp"
         android:editable="false"
         android:fontFamily="@font/opensans_regular"

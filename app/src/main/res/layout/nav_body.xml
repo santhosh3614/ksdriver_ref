@@ -30,6 +30,7 @@
             android:drawableLeft="@drawable/booking_history"
             android:drawablePadding="@dimen/_10sdp"
             android:fontFamily="@font/opensans_regular"
+            android:visibility="gone"
             android:padding="@dimen/_5sdp"
             android:text="@string/payment_history" />
 

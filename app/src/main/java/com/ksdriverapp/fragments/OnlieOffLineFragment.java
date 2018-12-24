@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.ksdriverapp.R;
@@ -18,6 +19,7 @@ import com.ksdriverapp.prefrences.SessionManager;
 import com.ksdriverapp.retrofit.WsFactory;
 import com.ksdriverapp.retrofit.WsResponse;
 import com.ksdriverapp.retrofit.WsUtils;
+import com.ksdriverapp.utils.PoupUtils;
 import com.ksdriverapp.utils.StaticUtils;
 
 import java.util.HashMap;
@@ -34,6 +36,8 @@ public class OnlieOffLineFragment extends BaseFragment implements WsResponse {
     private SessionManager sessionManager;
     private AlertDialog progressDialog;
     private MainActivity mainActivity;
+    private TextView txtStartTime, txtEndTime;
+
 
     public static OnlieOffLineFragment getInstance(Bundle bundle) {
         OnlieOffLineFragment myProfileFragment = new OnlieOffLineFragment();
@@ -53,6 +57,18 @@ public class OnlieOffLineFragment extends BaseFragment implements WsResponse {
         super.onViewCreated(view, savedInstanceState);
         imgOnnOffDuaty = view.findViewById(R.id.imgOnnOffDuaty);
         txtSubmit = view.findViewById(R.id.txtSubmit);
+        txtStartTime = view.findViewById(R.id.txtStartTime);
+        txtEndTime = view.findViewById(R.id.txtEndTime);
+        mainActivity = (MainActivity) getActivity();
+
+        txtStartTime.setOnClickListener(v -> {
+            PoupUtils.showDatePicker(mainActivity, txtStartTime);
+        });
+
+        txtEndTime.setOnClickListener(v -> {
+            PoupUtils.showDatePicker(mainActivity, txtEndTime);
+        });
+
         try {
             init();
         } catch (Exception e) {
@@ -64,7 +80,7 @@ public class OnlieOffLineFragment extends BaseFragment implements WsResponse {
         mainActivity = (MainActivity) getActivity();
         mainActivity.imgBack.setVisibility(View.GONE);
         mainActivity.imgMenu.setVisibility(View.VISIBLE);
-        mainActivity.txtTitle.setText("My Profile");
+        mainActivity.txtTitle.setText("Shedule Your Work");
     }
 
 
@@ -75,6 +91,7 @@ public class OnlieOffLineFragment extends BaseFragment implements WsResponse {
         progressDialog = new SpotsDialog(mainActivity, R.style.Custom);
         String onlineofline = sessionManager.getOnlineOfline();
         setHeader();
+
         if (TextUtils.isEmpty(onlineofline)) {
             if (onlineofline.equalsIgnoreCase("1")) {
                 imgOnnOffDuaty.setSelected(true);
@@ -92,7 +109,17 @@ public class OnlieOffLineFragment extends BaseFragment implements WsResponse {
             }
         });
         txtSubmit.setOnClickListener(v -> {
-            mainActivity.replaceFragmenr(WelcomeScreenFragment.getInstance(), WelcomeScreenFragment.TAG);
+            String startTime = txtStartTime.getText().toString().trim();
+            String endTime = txtEndTime.getText().toString().trim();
+            if (!imgOnnOffDuaty.isSelected()) {
+                PoupUtils.showAlertDailog(mainActivity, "Please select your duty online");
+            } else if (TextUtils.isEmpty(startTime)) {
+                PoupUtils.showAlertDailog(mainActivity, "Please select start time");
+            } else if (TextUtils.isEmpty(endTime)) {
+                PoupUtils.showAlertDailog(mainActivity, "Please select end time");
+            } else {
+                mainActivity.replaceFragmenr(WelcomeScreenFragment.getInstance(), WelcomeScreenFragment.TAG);
+            }
         });
     }
 

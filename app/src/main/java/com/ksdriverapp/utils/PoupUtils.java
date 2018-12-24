@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
@@ -17,8 +18,12 @@ import android.widget.Toast;
 
 import com.ksdriverapp.R;
 import com.ksdriverapp.adapter.CarCategoryAdapter;
+import com.ksdriverapp.adapter.CityAdapter;
+import com.ksdriverapp.adapter.StateAdapter;
 import com.ksdriverapp.listeners.RvClickListeners;
 import com.ksdriverapp.models.CarCategoryModel;
+import com.ksdriverapp.models.CityListModel;
+import com.ksdriverapp.models.StateModel;
 
 import java.util.Calendar;
 import java.util.List;
@@ -94,6 +99,47 @@ public class PoupUtils {
         dialog.show();
     }
 
+    public static void showState(Activity activity, String message,
+                                 List<StateModel.ResponseDatum> responseData,
+                                 RvClickListeners rvClickListeners) {
+        final Dialog dialog = new Dialog(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.black_tran_60);
+        dialog.setContentView(R.layout.layout_state);
+        RecyclerView rvState = dialog.findViewById(R.id.rvState);
+
+        rvState.setLayoutManager(new LinearLayoutManager(activity));
+        StateAdapter carCategoryAdapter = new StateAdapter(activity, responseData, (v, pos) -> {
+            rvClickListeners.onItemclick(v, pos);
+            dialog.cancel();
+        });
+        rvState.setAdapter(carCategoryAdapter);
+        TextView txtTitle = dialog.findViewById(R.id.txtTitle);
+        txtTitle.setText(message);
+        dialog.show();
+    }
+
+    public static void showCity(Activity activity, String message,
+                                List<CityListModel.ResponseDatum> responseData,
+                                RvClickListeners rvClickListeners) {
+
+        final Dialog dialog = new Dialog(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.black_tran_60);
+        dialog.setContentView(R.layout.layout_category_car);
+        RecyclerView rvCarList = dialog.findViewById(R.id.rvCarList);
+        rvCarList.setLayoutManager(new LinearLayoutManager(activity));
+
+        CityAdapter carCategoryAdapter = new CityAdapter(activity, responseData, (v, pos) -> {
+            rvClickListeners.onItemclick(v, pos);
+            dialog.cancel();
+        });
+        rvCarList.setAdapter(carCategoryAdapter);
+        TextView txtTitle = dialog.findViewById(R.id.txtTitle);
+        txtTitle.setText(message);
+        dialog.show();
+    }
+
 
     public static void showAlertDailog(Activity activity, String message) {
 
@@ -114,42 +160,37 @@ public class PoupUtils {
         dialog.show();
     }
 
+    private static String date;
+    private static DatePickerDialog datePickerDialog;
 
-    public static void showDatePicker(Context context) {
+    public static void showDatePicker(Context context, TextView txtLeaveDate) {
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+        datePickerDialog = new DatePickerDialog(context,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
+                        int month = monthOfYear + 1;
+                        String dateValue = view.getDayOfMonth() + "/" + month + "/" + view.getYear();
+                        Log.e("date", "" + date);
+                        showTimePicker(context, txtLeaveDate, dateValue);
                     }
                 }, mYear, mMonth, mDay);
-
-        datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "cancel", (v, which) -> {
-            Toast.makeText(context, "click on cancel", Toast.LENGTH_SHORT).show();
-        });
-        datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (v, which) -> {
-            showTimePicker(context);
-
-        });
         datePickerDialog.show();
     }
 
-    public static void showTimePicker(Context context) {
+    public static void showTimePicker(Context context, TextView txtLeaveDate, String date) {
         final Calendar c = Calendar.getInstance();
         int mHour = c.get(Calendar.HOUR_OF_DAY);
         int mMinute = c.get(Calendar.MINUTE);
         TimePickerDialog timePickerDialog = new TimePickerDialog(context,
                 (view, hourOfDay, minute) -> {
-//                        txtTime.setText(hourOfDay + ":" + minute);
+                    txtLeaveDate.setText(date + " " + hourOfDay + ":" + minute);
                 }, mHour, mMinute, false);
-
         timePickerDialog.show();
-
         timePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "cancel",
                 (view, which) -> {
 
@@ -161,6 +202,7 @@ public class PoupUtils {
                 });
 
     }
+
 
 }
 

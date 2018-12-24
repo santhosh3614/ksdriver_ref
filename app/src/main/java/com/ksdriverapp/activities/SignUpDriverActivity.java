@@ -13,17 +13,31 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.ksdriverapp.R;
+import com.ksdriverapp.models.CityListModel;
 import com.ksdriverapp.models.SignUpModel;
+import com.ksdriverapp.models.StateModel;
 import com.ksdriverapp.prefrences.SessionManager;
+import com.ksdriverapp.retrofit.WsFactory;
 import com.ksdriverapp.retrofit.WsResponse;
+import com.ksdriverapp.retrofit.WsUtils;
 import com.ksdriverapp.utils.PermisionUtils;
 import com.ksdriverapp.utils.PoupUtils;
 import com.ksdriverapp.utils.StaticUtils;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 import dmax.dialog.SpotsDialog;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+
 
 /**
  * Created by SONI on 11/29/2018.
@@ -40,7 +54,8 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
     private String filePath = "";
     private AlertDialog progressDialog;
     private SessionManager sessionManager;
-
+    private TextView txtState, txtCity;
+    private String stateId = "0";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,13 +74,13 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
         edtFullName = findViewById(R.id.edtFullName);
         edtMobile = findViewById(R.id.edtMobile);
         edtEmail = findViewById(R.id.edtEmail);
-        edtCity = findViewById(R.id.edtCity);
         edtAddress = findViewById(R.id.edtAddress);
         edtLicenceNo = findViewById(R.id.edtLicenceNo);
         edtExpr = findViewById(R.id.edtExpr);
-
         txtSubmit = findViewById(R.id.txtSubmit);
         imgProfile = findViewById(R.id.imgProfile);
+        txtState = findViewById(R.id.txtState);
+        txtCity = findViewById(R.id.txtCity);
         progressDialog = new SpotsDialog(this, R.style.Custom);
         sessionManager = new SessionManager(this);
 
@@ -84,16 +99,26 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                             galleryIntent();
                     });
         });
+        txtState.setOnClickListener(v -> {
+            Call sateList = WsFactory.getSatate();
+            WsUtils.getReponse(sateList, StaticUtils.REQUEST_STATE_LIST, this);
+        });
+        txtCity.setOnClickListener(v -> {
+            Map<String, String> map = new HashMap<>();
+            map.put("iStatesId", stateId);
+            Call cityListModel = WsFactory.getCityState(map);
+            WsUtils.getReponse(cityListModel, StaticUtils.REQUEST_STATE_CITY, this);
+        });
 
         txtSubmit.setOnClickListener(v -> {
             String fullName = edtFullName.getText().toString().trim();
             String mobile = edtMobile.getText().toString().trim();
             String email = edtEmail.getText().toString().trim();
-            String city = edtCity.getText().toString().trim();
             String licNo = edtLicenceNo.getText().toString().trim();
             String address = edtAddress.getText().toString().trim();
             String expr = edtExpr.getText().toString().trim();
-
+            String state = txtState.getText().toString().trim();
+            String city = txtCity.getText().toString().trim();
 
             if (TextUtils.isEmpty(fullName)) {
                 PoupUtils.showAlertDailog(this, "Enter First Name");
@@ -101,8 +126,10 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                 PoupUtils.showAlertDailog(this, "Enter Mobile");
             } else if (TextUtils.isEmpty(email)) {
                 PoupUtils.showAlertDailog(this, "Enter email");
+            } else if (TextUtils.isEmpty(state)) {
+                PoupUtils.showAlertDailog(this, "Select state");
             } else if (TextUtils.isEmpty(city)) {
-                PoupUtils.showAlertDailog(this, "Enter city");
+                PoupUtils.showAlertDailog(this, "Select city");
             } else if (TextUtils.isEmpty(licNo)) {
                 PoupUtils.showAlertDailog(this, "Enter licNo");
             } else if (TextUtils.isEmpty(expr)) {
@@ -112,7 +139,7 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
             } else if (TextUtils.isEmpty(filePath)) {
                 PoupUtils.showAlertDailog(this, "Please select picture");
             } else {
-                /* progressDialog.show();
+                progressDialog.show();
                 File file = new File(filePath);
                 RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
                 MultipartBody.Part body = MultipartBody.Part.createFormData("vDriverImage", file.getName(), reqFile);
@@ -123,6 +150,8 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                 RequestBody vDriverEmail = RequestBody.create(MediaType.parse("text/plain"), email);
                 RequestBody vDriverExp = RequestBody.create(MediaType.parse("text/plain"), expr);
                 RequestBody vCity = RequestBody.create(MediaType.parse("text/plain"), city);
+                RequestBody vState = RequestBody.create(MediaType.parse("text/plain"), state);
+
                 Map<String, RequestBody> map = new HashMap<>();
                 map.put("vDriverName", vDriverName);
                 map.put("vLicenceNumber", vLicenceNumber);
@@ -131,9 +160,13 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                 map.put("vDriverEmail", vDriverEmail);
                 map.put("vDriverExp", vDriverExp);
                 map.put("vCity", vCity);
+                map.put("vState", vState);
+
                 Call loginWsCall = WsFactory.signUp(body, map);
-                WsUtils.getReponse(loginWsCall, StaticUtils.REQUEST_SIGN_UP, this);*/
+                WsUtils.getReponse(loginWsCall, StaticUtils.REQUEST_SIGN_UP, this);
                 startActivity(new Intent(this, MainActivity.class));
+                finish();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }
@@ -204,6 +237,26 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+            case StaticUtils.REQUEST_STATE_LIST:
+                StateModel stateModel = (StateModel) response;
+                if (stateModel != null) {
+                    PoupUtils.showState(SignUpDriverActivity.this, "Select State", stateModel.getResponseData(), (view, pos) -> {
+                        StateModel.ResponseDatum responseDatum = stateModel.getResponseData().get(pos);
+                        stateId = responseDatum.getIStatesId();
+                        txtState.setText(responseDatum.getVStateName());
+                    });
+                }
+                break;
+            case StaticUtils.REQUEST_STATE_CITY:
+                CityListModel cityListModel = (CityListModel) response;
+                if (cityListModel != null) {
+                    PoupUtils.showCity(SignUpDriverActivity.this, "Select City", cityListModel.getResponseData(), (view, pos) -> {
+                        CityListModel.ResponseDatum responseDatum = cityListModel.getResponseData().get(pos);
+                        txtCity.setText(responseDatum.getVCityName());
+                    });
+                }
+                break;
         }
     }
 

@@ -1,8 +1,10 @@
 package com.ksdriverapp.retrofit;
 
 import com.ksdriverapp.models.CarCategoryModel;
+import com.ksdriverapp.models.CityListModel;
 import com.ksdriverapp.models.OnlineOffline;
 import com.ksdriverapp.models.SignUpModel;
+import com.ksdriverapp.models.StateModel;
 
 import java.util.Map;
 
@@ -110,6 +112,14 @@ private void requestUploadSurvey() {
     @FormUrlEncoded
     @POST("oauth/getdriverdetail")
     Call<SignUpModel> getProfile(@FieldMap Map<String, String> fields);
+
+    @GET("oauth/getstatelist")
+    Call<StateModel> stateList();
+
+    @FormUrlEncoded
+    @POST("oauth/getcitylist")
+    Call<CityListModel> cityList(@FieldMap Map<String, String> fields);
+
 
 
 }

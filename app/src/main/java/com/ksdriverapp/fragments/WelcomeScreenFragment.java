@@ -49,6 +49,10 @@ public class WelcomeScreenFragment extends BaseFragment {
         mainActivity.imgBack.setVisibility(View.VISIBLE);
         mainActivity.imgMenu.setVisibility(View.GONE);
         mainActivity.txtTitle.setText("Welcome Screen");
+        mainActivity.imgBack.setOnClickListener(v -> {
+            mainActivity.onBackPressed();
+        });
+
     }
 
 
