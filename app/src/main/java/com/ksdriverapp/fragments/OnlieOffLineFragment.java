@@ -93,7 +93,7 @@ public class OnlieOffLineFragment extends BaseFragment implements WsResponse {
         setHeader();
 
         if (TextUtils.isEmpty(onlineofline)) {
-            if (onlineofline.equalsIgnoreCase("1")) {
+            if (onlineofline.equalsIgnoreCase("Driver Online")) {
                 imgOnnOffDuaty.setSelected(true);
             } else {
                 imgOnnOffDuaty.setSelected(false);
@@ -102,7 +102,7 @@ public class OnlieOffLineFragment extends BaseFragment implements WsResponse {
         imgOnnOffDuaty.setOnClickListener(v -> {
             if (imgOnnOffDuaty.isSelected()) {
                 imgOnnOffDuaty.setSelected(false);
-                onlineOffline = 1;
+                onlineOffline = 0;
             } else {
                 imgOnnOffDuaty.setSelected(true);
                 onlineOffline = 1;
@@ -111,14 +111,13 @@ public class OnlieOffLineFragment extends BaseFragment implements WsResponse {
         txtSubmit.setOnClickListener(v -> {
             String startTime = txtStartTime.getText().toString().trim();
             String endTime = txtEndTime.getText().toString().trim();
-            if (!imgOnnOffDuaty.isSelected()) {
-                PoupUtils.showAlertDailog(mainActivity, "Please select your duty online");
-            } else if (TextUtils.isEmpty(startTime)) {
+            if (TextUtils.isEmpty(startTime)) {
                 PoupUtils.showAlertDailog(mainActivity, "Please select start time");
             } else if (TextUtils.isEmpty(endTime)) {
                 PoupUtils.showAlertDailog(mainActivity, "Please select end time");
             } else {
-                mainActivity.replaceFragmenr(WelcomeScreenFragment.getInstance(), WelcomeScreenFragment.TAG);
+//                mainActivity.replaceFragmenr(WelcomeScreenFragment.getInstance(), WelcomeScreenFragment.TAG);
+                onlineoffline();
             }
         });
     }
@@ -138,7 +137,7 @@ public class OnlieOffLineFragment extends BaseFragment implements WsResponse {
         switch (code) {
             case StaticUtils.REQUEST_ONLINE_OFFLINE:
                 OnlineOffline onlineOffline = (OnlineOffline) response;
-                sessionManager.setOnlineOfline(onlineOffline + "");
+                sessionManager.setOnlineOfline(onlineOffline.getResponseMessage());
                 break;
             default:
                 break;
