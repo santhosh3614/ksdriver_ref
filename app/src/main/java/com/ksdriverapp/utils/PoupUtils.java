@@ -14,7 +14,6 @@ import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ksdriverapp.R;
 import com.ksdriverapp.adapter.CarCategoryAdapter;
@@ -122,21 +121,25 @@ public class PoupUtils {
     public static void showCity(Activity activity, String message,
                                 List<CityListModel.ResponseDatum> responseData,
                                 RvClickListeners rvClickListeners) {
-
         final Dialog dialog = new Dialog(activity, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawableResource(R.color.black_tran_60);
         dialog.setContentView(R.layout.layout_category_car);
+        TextView txtCityNa = dialog.findViewById(R.id.txtCityNa);
         RecyclerView rvCarList = dialog.findViewById(R.id.rvCarList);
         rvCarList.setLayoutManager(new LinearLayoutManager(activity));
-
-        CityAdapter carCategoryAdapter = new CityAdapter(activity, responseData, (v, pos) -> {
-            rvClickListeners.onItemclick(v, pos);
-            dialog.cancel();
-        });
-        rvCarList.setAdapter(carCategoryAdapter);
         TextView txtTitle = dialog.findViewById(R.id.txtTitle);
         txtTitle.setText(message);
+        if (responseData.size() > 0) {
+            txtCityNa.setVisibility(View.GONE);
+            CityAdapter carCategoryAdapter = new CityAdapter(activity, responseData, (v, pos) -> {
+                rvClickListeners.onItemclick(v, pos);
+                dialog.cancel();
+            });
+            rvCarList.setAdapter(carCategoryAdapter);
+        } else {
+            txtCityNa.setVisibility(View.VISIBLE);
+        }
         dialog.show();
     }
 

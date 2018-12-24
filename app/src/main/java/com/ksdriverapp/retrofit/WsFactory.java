@@ -6,13 +6,11 @@ import com.ksdriverapp.models.OnlineOffline;
 import com.ksdriverapp.models.SignUpModel;
 import com.ksdriverapp.models.StateModel;
 
-import java.util.Calendar;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.FieldMap;
 
 /**
  * Created by SONI on 9/30/2018.
@@ -43,8 +41,7 @@ public class WsFactory {
         ApiInterface apiService = ApiClient.getXmlRetrofit().create(ApiInterface.class);
         Call<ROOT> loginCall = apiService.getXmlData();
         return loginCall;
-
-    }
+     }
 */
 
     public static Call signUp(MultipartBody.Part image, Map<String, RequestBody> map) {

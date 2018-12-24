@@ -13,7 +13,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.ksdriverapp.R;
@@ -100,10 +99,12 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                     });
         });
         txtState.setOnClickListener(v -> {
+            progressDialog.show();
             Call sateList = WsFactory.getSatate();
             WsUtils.getReponse(sateList, StaticUtils.REQUEST_STATE_LIST, this);
         });
         txtCity.setOnClickListener(v -> {
+            progressDialog.show();
             Map<String, String> map = new HashMap<>();
             map.put("iStatesId", stateId);
             Call cityListModel = WsFactory.getCityState(map);
@@ -141,8 +142,11 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
             } else {
                 progressDialog.show();
                 File file = new File(filePath);
+                //This is
                 RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
                 MultipartBody.Part body = MultipartBody.Part.createFormData("vDriverImage", file.getName(), reqFile);
+
+                //This is strin value change in RequestBody
                 RequestBody vDriverName = RequestBody.create(MediaType.parse("text/plain"), fullName);
                 RequestBody vLicenceNumber = RequestBody.create(MediaType.parse("text/plain"), licNo);
                 RequestBody iDriverContactNo = RequestBody.create(MediaType.parse("text/plain"), mobile);
@@ -151,6 +155,7 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                 RequestBody vDriverExp = RequestBody.create(MediaType.parse("text/plain"), expr);
                 RequestBody vCity = RequestBody.create(MediaType.parse("text/plain"), city);
                 RequestBody vState = RequestBody.create(MediaType.parse("text/plain"), state);
+                RequestBody txDeviceToken = RequestBody.create(MediaType.parse("text/plain"), sessionManager.getNotificationToken());
 
                 Map<String, RequestBody> map = new HashMap<>();
                 map.put("vDriverName", vDriverName);
@@ -161,13 +166,10 @@ public class SignUpDriverActivity extends BaseActivity implements WsResponse {
                 map.put("vDriverExp", vDriverExp);
                 map.put("vCity", vCity);
                 map.put("vState", vState);
-
+                map.put("txDeviceToken", txDeviceToken);
                 Call loginWsCall = WsFactory.signUp(body, map);
                 WsUtils.getReponse(loginWsCall, StaticUtils.REQUEST_SIGN_UP, this);
-                startActivity(new Intent(this, MainActivity.class));
-                finish();
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
+             }
         });
     }
 
