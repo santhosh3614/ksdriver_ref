@@ -8,10 +8,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -167,23 +167,33 @@ public class PoupUtils {
     private static DatePickerDialog datePickerDialog;
 
     public static void showDatePicker(Context context, TextView txtLeaveDate) {
+        String getText = txtLeaveDate.getText().toString().trim();
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
-        datePickerDialog = new DatePickerDialog(context,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-                        int month = monthOfYear + 1;
-                        String dateValue = view.getDayOfMonth() + "/" + month + "/" + view.getYear();
-                        Log.e("date", "" + date);
-                        showTimePicker(context, txtLeaveDate, dateValue);
-                    }
-                }, mYear, mMonth, mDay);
-        datePickerDialog.show();
+
+        if (TextUtils.isEmpty(getText)) {
+        } else {
+            String[] dateAndTimes = getText.split(" ");
+            String dateStr = dateAndTimes[0];
+            String timeStr = dateAndTimes[1];
+            String[] dates = dateStr.split("/");
+            mDay = Integer.parseInt(dates[0]);
+            mMonth = Integer.parseInt(dates[1]);
+            mYear = Integer.parseInt(dates[2]);
+        }
+
+         datePickerDialog = new DatePickerDialog(context,
+                 (view, year, monthOfYear, dayOfMonth) -> {
+                     int month = monthOfYear + 1;
+                     String dateValue = view.getDayOfMonth() + "/" + month + "/" + view.getYear();
+                     Log.e("date", "" + date);
+                     showTimePicker(context, txtLeaveDate, dateValue);
+                 }, mYear, mMonth, mDay);
+              datePickerDialog.show();
     }
+
 
     public static void showTimePicker(Context context, TextView txtLeaveDate, String date) {
         final Calendar c = Calendar.getInstance();
@@ -193,18 +203,13 @@ public class PoupUtils {
                 (view, hourOfDay, minute) -> {
                     txtLeaveDate.setText(date + " " + hourOfDay + ":" + minute);
                 }, mHour, mMinute, false);
-        timePickerDialog.show();
-        timePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "cancel",
-                (view, which) -> {
 
-                });
-
-        timePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "cancel",
-                (view, which) -> {
-
-                });
-
-    }
+          timePickerDialog.show();
+          timePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "cancel",
+                (view, which) -> {  });
+          timePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "cancel",
+                (view, which) -> {    });
+      }
 
 
 }
