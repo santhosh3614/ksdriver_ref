@@ -1,266 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_above="@+id/llBelow"
-    android:layout_alignParentTop="true">
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_above="@+id/txtSubmit"
+        android:layout_alignParentTop="true"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgProfile"
-            android:layout_width="@dimen/_75sdp"
-            android:layout_height="@dimen/_75sdp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@mipmap/ic_launcher" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Update Photo"
-            android:textColor="@color/colorPrimary" />
-
-
-        <EditText
-            android:id="@+id/edtFullName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/user"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
-            android:hint="@string/full_name"
-            android:inputType="text"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/email"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
-            android:hint="Email id"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_75sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@mipmap/ic_launcher" />
 
-        <EditText
-            android:id="@+id/edtMobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/mobile"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
-            android:hint="@string/mobile"
-            android:inputType="phone"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/edtState"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/state"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
-            android:hint="State"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/txtState"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/state"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:drawableRight="@drawable/arrow"
-            android:gravity="center_vertical"
-            android:hint="State"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Update Photo"
+                android:textColor="@color/colorPrimary" />
 
 
-        <TextView
-            android:id="@+id/txtCity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/city"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
-            android:hint="City"
-            android:inputType="textEmailAddress"
-            android:drawableRight="@drawable/arrow"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
+            <EditText
+                android:id="@+id/edtFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_edit_text"
+                android:drawableLeft="@drawable/user"
+                android:drawablePadding="@dimen/_10sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="center_vertical"
+                android:hint="@string/full_name"
+                android:inputType="text"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/gray_text_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textSize="16sp" />
 
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_edit_text"
+                android:drawableLeft="@drawable/email"
+                android:drawablePadding="@dimen/_10sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="center_vertical"
+                android:hint="Email id"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/gray_text_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/edtLicenceNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/lances"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
-            android:hint="@string/your_linsence_no"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
+            <EditText
+                android:id="@+id/edtMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_edit_text"
+                android:drawableLeft="@drawable/mobile"
+                android:drawablePadding="@dimen/_10sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="center_vertical"
+                android:hint="@string/mobile"
+                android:inputType="phone"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/gray_text_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/edtExpr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_edit_text"
-            android:drawableLeft="@drawable/email"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="center_vertical"
-            android:hint="Exprence"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
+            <EditText
+                android:id="@+id/edtState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_edit_text"
+                android:drawableLeft="@drawable/state"
+                android:drawablePadding="@dimen/_10sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="center_vertical"
+                android:hint="State"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/gray_text_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textSize="16sp"
+                android:visibility="gone" />
 
-        <EditText
-            android:id="@+id/edtAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_text_area"
-            android:drawablePadding="@dimen/_10sdp"
-            android:fontFamily="@font/opensans_regular"
-            android:gravity="top"
-            android:hint="Address"
-            android:lines="3"
-            android:padding="@dimen/_10sdp"
-            android:paddingLeft="@dimen/_10sdp"
-            android:paddingTop="@dimen/_10sdp"
-            android:textColor="@color/gray_text_color"
-            android:textColorHint="@color/gray_text_color"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/txtUpload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/bg_blue_button"
-            android:fontFamily="@font/opensans_regular"
-            android:paddingBottom="@dimen/_10sdp"
-            android:paddingLeft="@dimen/_30sdp"
-            android:paddingRight="@dimen/_30sdp"
-            android:paddingTop="@dimen/_10sdp"
-            android:text="Uplaod Doc"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:visibility="gone" />
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_15sdp">
+            <TextView
+                android:id="@+id/txtState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_edit_text"
+                android:drawableLeft="@drawable/state"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableRight="@drawable/arrow"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="center_vertical"
+                android:hint="State"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/gray_text_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textSize="16sp" />
 
 
             <TextView
-                android:id="@+id/txtSubmit"
+                android:id="@+id/txtCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_edit_text"
+                android:drawableLeft="@drawable/city"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableRight="@drawable/arrow"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="center_vertical"
+                android:hint="City"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/gray_text_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textSize="16sp" />
+
+
+            <EditText
+                android:id="@+id/edtLicenceNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_edit_text"
+                android:drawableLeft="@drawable/lances"
+                android:drawablePadding="@dimen/_10sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="center_vertical"
+                android:hint="@string/your_linsence_no"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/gray_text_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtExpr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_edit_text"
+                android:drawableLeft="@drawable/email"
+                android:drawablePadding="@dimen/_10sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="center_vertical"
+                android:hint="Exprence"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/gray_text_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_text_area"
+                android:drawablePadding="@dimen/_10sdp"
+                android:fontFamily="@font/opensans_regular"
+                android:gravity="top"
+                android:hint="Address"
+                android:lines="3"
+                android:padding="@dimen/_10sdp"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:textColor="@color/gray_text_color"
+                android:textColorHint="@color/gray_text_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtUpload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/bg_yello_button"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_blue_button"
                 android:fontFamily="@font/opensans_regular"
                 android:paddingBottom="@dimen/_10sdp"
                 android:paddingLeft="@dimen/_30sdp"
                 android:paddingRight="@dimen/_30sdp"
                 android:paddingTop="@dimen/_10sdp"
-                android:text="Submit"
+                android:text="Uplaod Doc"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
-        </RelativeLayout>
+                android:textSize="16sp"
+                android:visibility="gone" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp" />
+        </LinearLayout>
+    </ScrollView>
 
+    <TextView
+        android:id="@+id/txtSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:background="@drawable/bg_yello_button"
+        android:fontFamily="@font/opensans_regular"
+        android:gravity="center"
+        android:paddingBottom="@dimen/_10sdp"
+        android:paddingLeft="@dimen/_30sdp"
+        android:paddingRight="@dimen/_30sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:text="Submit"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</RelativeLayout>
 
-    </LinearLayout>
-</ScrollView>
 
